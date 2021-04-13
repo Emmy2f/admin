@@ -1,3 +1,5 @@
+<?php session_start();
+?>
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -13,14 +15,24 @@ and open the template in the editor.
         <?php include 'sidebar.php'; ?>
         <?php
         include_once 'commonMethods.php';
+        doDBConnect();
         ?>
     </head>
-    <body>
+    <body><?php
+        global $con;
+        $room = $_POST['roomnumber'];
+        $floor = $con->query("select floor from roomMaster where roomNumber=$room;");
+        $type = $con->query("select roomTypeId from roomMaster where roomNumber=$room;");
+        
+       // echo "<script>alert($type2)</script>";
+        ?>
+
         <div class="page-wrapper">
+
             <div class="content">
                 <div class="row">
                     <div class="col-lg-8 offset-lg-2">
-                        <h4 class="page-title">Edit Room</h4>
+                        <h4 class="page-title">Edit Room </h4>
                     </div>
                 </div>
                 <div class="row">
@@ -28,12 +40,16 @@ and open the template in the editor.
                         <form>
                             <div class="form-group">
                                 <label>Room Number</label>
-                                <input class="form-control" type="text">
+                                <input class="form-control" type="text" value="<?php echo $room ?>">
                             </div>
-                            
-                           <div class="form-group">
+
+                            <div class="form-group">
                                 <label>Floor</label>
-                                <select class="form-control">
+                                <select class="form-control" value="<?php while ($row = $floor->fetch_assoc()) {
+            echo $row['floor'] ;
+            
+        } ?>">
+                                    <option>select</option>
                                     <option>Ground</option>
                                     <option>1</option>
                                     <option>2</option>
@@ -45,13 +61,16 @@ and open the template in the editor.
                             </div>
                             <div class="form-group">
                                 <label>Room Type</label>
-                                <select class="form-control">
+                                <select class="form-control" >
                                     <option></option>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label>Number of Beds</label>
-                                <input class="form-control" type="text">
+                                <input class="form-control" type="text" value="<?php while ($row = $type->fetch_assoc()) {
+            echo $row['roomTypeId'] ;
+            
+        } ?>">
                             </div>
                             <div class="form-group">
                                 <label>Cost Per Day</label>

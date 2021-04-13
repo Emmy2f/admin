@@ -154,7 +154,7 @@
                                         <div class="form-group">
                                             <label>Date of Birth</label>
                                             <div>
-                                                <input name="txtdob" type="date" class="form-control datetimepicker">
+                                                <input name="txtdob" type="date" class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -250,10 +250,10 @@
             $email = $_POST['txtemail'];
             $gender = $_POST['txtgender'];
             $address = $_POST['txtaddress'];
-            $dob =  $_POST['txtdob'].date("Y/m/d") ;
-            $doj = $_POST['txtdoj']. date("Y/m/d") ;
+            $dob =  $_POST['txtdob'];
+            $doj = $_POST['txtdoj'] ;
             $marital = $_POST['txtmarital'];
-            //echo "<script>alert('$dob $doj')</script>";
+            echo "<script>alert('$dob $doj')</script>";
 
             global $con;
             $qry = $con->query("insert into staffMaster(staffFName,staffMName,staffLName,contactNumber,email,gender,address,"

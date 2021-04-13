@@ -16,7 +16,7 @@ and open the template in the editor.
         ?>
     </head>
     <body>
-         <div class="page-wrapper">
+        <div class="page-wrapper">
             <div class="content">
                 <div class="row">
                     <div class="col-sm-5 col-5">
@@ -45,7 +45,7 @@ and open the template in the editor.
                                     <tr>
                                         <td>1</td>
                                         <td>Dentists</td>
-										<td><span class="custom-badge status-green">Active</span></td>
+                                        <td><span class="custom-badge status-green">Active</span></td>
                                         <td class="text-right">
                                             <div class="dropdown dropdown-action">
                                                 <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
@@ -59,7 +59,7 @@ and open the template in the editor.
                                     <tr>
                                         <td>2</td>
                                         <td>Neurology</td>
-										<td><span class="custom-badge status-red">Inactive</span></td>
+                                        <td><span class="custom-badge status-red">Inactive</span></td>
                                         <td class="text-right">
                                             <div class="dropdown dropdown-action">
                                                 <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
@@ -73,7 +73,7 @@ and open the template in the editor.
                                     <tr>
                                         <td>3</td>
                                         <td>Opthalmology</td>
-										<td><span class="custom-badge status-green">Active</span></td>
+                                        <td><span class="custom-badge status-green">Active</span></td>
                                         <td class="text-right">
                                             <div class="dropdown dropdown-action">
                                                 <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
@@ -84,15 +84,15 @@ and open the template in the editor.
                                             </div>
                                         </td>
                                     </tr>
-                                    
+
                                 </tbody>
                             </table>
                         </div>
                     </div>
-                    
+
                 </div>
                 <br><br>
-                 <div class="row">
+                <div class="row">
                     <div class="col-md-12">
                         <h4 class="title">1st Floor</h4>
                         <div class="table-responsive">
@@ -103,7 +103,7 @@ and open the template in the editor.
                                         <th>Room Type</th>
                                         <th>Number of Beds</th>
                                         <th>Cost per Day</th>
-                                        
+
                                         <th class="text-right">Action</th>
                                     </tr>
                                 </thead>
@@ -111,7 +111,7 @@ and open the template in the editor.
                                     <tr>
                                         <td>1</td>
                                         <td>Dentists</td>
-										<td><span class="custom-badge status-green">Vacant</span></td>
+                                        <td><span class="custom-badge status-green">Vacant</span></td>
                                         <td class="text-right">
                                             <div class="dropdown dropdown-action">
                                                 <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
@@ -125,7 +125,7 @@ and open the template in the editor.
                                     <tr>
                                         <td>2</td>
                                         <td>Neurology</td>
-										<td><span class="custom-badge status-red">Occupied</span></td>
+                                        <td><span class="custom-badge status-red">Occupied</span></td>
                                         <td class="text-right">
                                             <div class="dropdown dropdown-action">
                                                 <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
@@ -139,7 +139,7 @@ and open the template in the editor.
                                     <tr>
                                         <td>3</td>
                                         <td>Opthalmology</td>
-										<td><span class="custom-badge status-green">Active</span></td>
+                                        <td><span class="custom-badge status-green">Active</span></td>
                                         <td class="text-right">
                                             <div class="dropdown dropdown-action">
                                                 <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
@@ -150,15 +150,15 @@ and open the template in the editor.
                                             </div>
                                         </td>
                                     </tr>
-                                    
+
                                 </tbody>
                             </table>
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
-            
+
         </div>
     </body>
 </html>

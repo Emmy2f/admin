@@ -46,7 +46,7 @@ and open the template in the editor.
                                         <th>Number of Beds</th>
                                         <th>Cost Per Day</th>
                                         <th>Description</th>
-                                        <th class="text-right">Action</th>
+                                        <th class="text-center" colspan="2">Action</th>
                                     </tr>
                                 </thead>
                                <tbody>
@@ -60,15 +60,18 @@ and open the template in the editor.
                                 . "<td>" . $row['numberOfBeds'] . "</td>"
                                 . "<td>" . $row['costPerDay'] . "</td>"
                                 . "<td>" . $row['description'] . "</td>"
-                                ."<td class='text-right'>
-                                            <div class='dropdown dropdown-action'>
-                                                <a href='#' class='action-icon dropdown-toggle' data-toggle='dropdown' aria-expanded='false'><i class='fa fa-ellipsis-v'></i></a>
-                                                <div class='dropdown-menu dropdown-menu-right'>
-                                                    <a class='dropdown-item' href='edit-room.php' ><li><form action='edit-room.php' method='post'><input type='hidden' name='roomnumber' value='$row[roomNumber]'><input type='submit' name='edit' value='Edit'></form></li></a>
-                                                    <a class=dropdown-item href='#' data-toggle='modal' data-target='#delete_department'><i class='fa fa-trash-o m-r-5'></i> Delete</a>
-                                                </div>
-                                            </div>
+                                ."<td>
+                                            
+                                    <form action='edit-room.php' method='post'><input type='hidden' name='roomnumber' value='$row[roomNumber]'><input type='submit' name='edit' value='Edit'></form>
+                                    
+                                               
                                         </td>"
+                                  ."<td>
+                                            
+                                    
+                                    <form action='#' method='post'><input type='hidden' name='roomnumber' value='$row[roomNumber]'><input type='submit' name='edit' value='Delete'></form>
+                                               
+                                        </td>"          
                                 . "</tr>";
                             }
                             

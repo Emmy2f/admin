@@ -19,7 +19,7 @@ and open the template in the editor.
     </head>
     <body><?php
         
-        $err_rnum = "";
+        $err_rnum = $err_floor=$err_type=$err_beds=$err_cost=$err_description="";
         ?>
         <div class="page-wrapper">
             <div class="content">
@@ -55,6 +55,7 @@ and open the template in the editor.
                             <div class="form-group">
                                 <label>Floor</label>
                                 <select class="form-control" name="txtfloor">
+                                    <option value="select">--Select--</option>
                                     <option value="Ground">Ground</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -63,10 +64,25 @@ and open the template in the editor.
                                     <option value="5">5</option>
                                     <option value="6">6</option>
                                 </select>
+                                <span style="color:red">
+                                     <?php
+                                                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                                                    if($_POST['txtfloor']=="select")
+                                                    {
+                                                        $err_floor="Floor is required";
+                                                    }
+                                                   else {
+                                                        $err_floor = "";
+                                                    }
+                                                }
+                                                echo $err_floor;
+                                                ?>
+                                </span>
                             </div>
                             <div class="form-group">
                                 <label>Room Type</label>
                                 <select class="form-control" name="txttype">
+                                    <option value="select">--Select--</option>
                                     <?php
                                     $fetch = $con->query("select * from roomType");
                                     if ($fetch) {
@@ -78,25 +94,104 @@ and open the template in the editor.
                                     }
                                     ?>
                                 </select>
+                                <span style="color:red">
+                                     <?php
+                                                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                                                    if($_POST['txttype']=="select")
+                                                    {
+                                                        $err_type="Room Type is required";
+                                                    }
+                                                   else {
+                                                        $err_type = "";
+                                                    }
+                                                }
+                                                echo $err_type;
+                                                ?>
+                                </span>
                             </div>
                             <div class="form-group">
                                 <label>Number of Beds</label>
                                 <input class="form-control" type="text" name="txtbeds">
+                                <span style="color:red">
+                                     <?php
+                                                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                                                    if(empty($_POST['txtbeds']))
+                                                    {
+                                                        $err_beds="Number of Beds is required";
+                                                    }
+                                                    else if ((!preg_match("/[0-9][0-9]/", $_POST['txtbeds']))) {
+                                                        $err_beds = "Invalid Beds number";
+                                                        
+                                                    } 
+                                                    else if($_POST['txtbeds']>12 ||$_POST['txtbeds']<0)
+                                                    {
+                                                        $err_beds="Beds should be less than 12 and greater than 0";
+                                                    }
+                                                    else {
+                                                        $err_beds = "";
+                                                    }
+                                                    
+                                                    echo $err_beds;
+                                                }
+                                                
+                                                ?>
+                                </span>
                             </div>
                             <div class="form-group">
                                 <label>Cost Per Day</label>
                                 <input class="form-control" type="text" name="txtcost">
+                                <span style="color:red">
+                                     <?php
+                                                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                                                    if(empty($_POST['txtcost']))
+                                                    {
+                                                        $err_cost="Cost is required";
+                                                    }
+                                                    else if ((!preg_match("/[0-9]+/", $_POST['txtcost']))) {
+                                                        $err_cost = "Invalid Cost";
+                                                    } 
+                                                    else if($_POST['txtcost']>100000 ||$_POST['txtcost']<0)
+                                                    {
+                                                        $err_cost="Cost should be between 0 to 100000";
+                                                    }else {
+                                                        $err_cost = "";
+                                                    }
+                                                    
+                                                    echo $err_cost;
+                                                }
+                                                
+                                                ?>
+                                </span>
                             </div>
                             <div class="form-group">
                                 <label>Description</label>
                                 <textarea class="form-control" rows="3" cols="30" name="txtdesc"></textarea>
+                                <span style="color:red">
+                                     <?php
+                                                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                                                    if(empty($_POST['txtdesc']))
+                                                    {
+                                                        $err_description="Description is required";
+                                                    }
+                                                    else if ((!preg_match("/[A-Za-z ]+/", $_POST['txtdesc']))) {
+                                                        $err_description = "Invalid Description";
+                                                    } else {
+                                                        $err_description = "";
+                                                    }
+                                                    echo $err_description;
+                                                }
+                                                
+                                                ?>
+                                </span>
                             </div>
                             <div class="m-t-20 text-center">
                                 <button class="btn btn-primary submit-btn" name="btnaddroom">Add Room</button>
                             </div>
                         </form>
                         <?php
-                        if (isset($_POST['btnaddroom'])) {
+                        if (isset($_POST['btnaddroom']) ) {
+                            if($err_rnum=="" && $err_floor=="" && $err_type=="" && $err_beds=="" && $err_cost=="" && $err_description=="")
+                            {
                             $roomnum = $_POST['txtrnum'];
                             $floor = $_POST['txtfloor'];
                             $rtype = $_POST['txttype'];
@@ -113,6 +208,11 @@ and open the template in the editor.
                                 echo "<script>alert('Data Inserted')</script>";
                             } else {
                                 echo "<script>alert('Data Not Inserted')</script>";
+                            }
+                            }
+                            else
+                            {
+                                echo "<script>alert('Form is not filled correctly')</script>";
                             }
                         }
                         ?>

@@ -23,8 +23,9 @@ and open the template in the editor.
         $room = $_POST['roomnumber'];
         $floor = $con->query("select floor from roomMaster where roomNumber=$room;");
         $type = $con->query("select roomTypeId from roomMaster where roomNumber=$room;");
-        while ($row = $floor->fetch_assoc()) {
-        echo "<script>".$row['floor']."</script>" ;}
+        $beds = $con->query("select numberOfBeds from roomMaster where roomNumber=$room;");
+         $cost = $con->query("select costPerDay from roomMaster where roomNumber=$room;");
+       
         //echo "<script>alert($floor)</script>";
         ?>
 
@@ -41,7 +42,7 @@ and open the template in the editor.
                         <form>
                             <div class="form-group">
                                 <label>Room Number</label>
-                                <input class="form-control" type="text" value="<?php echo $room ?>">
+                                <input class="form-control" type="text" value="<?php echo $room ?>"n disabled="true">
                             </div>
 
                             <div class="form-group">
@@ -60,7 +61,7 @@ and open the template in the editor.
             
                                      }
                                      ?> 
-                                    <option value="select" selected=<?php $flag ?> > select</option>
+                                    <option value="select" selected="<?php echo $flag ?>" > select</option>
                                     <?php 
                                     while ($row = $floor->fetch_assoc()) {
                                         if($row['floor'] =="Ground")
@@ -74,7 +75,7 @@ and open the template in the editor.
             
                                      }
                                      ?> 
-                                    <option value="Ground" selected=<?php $flagg; ?> > Ground</option>
+                                    <option value="Ground" selected="<?php echo $flagg; ?>"> Ground</option>
                                     <?php 
                                     while ($row = $floor->fetch_assoc()) {
                                         if($row['floor'] =="1")
@@ -88,7 +89,7 @@ and open the template in the editor.
             
                                      }
                                      ?> 
-                                    <option value="1" selected=<?php $flag1; ?>> 1</option>
+                                    <option value="1" selected="<?php echo $flag1; ?>"> 1</option>
                                     
                                     <?php 
                                     while ($row = $floor->fetch_assoc()) {
@@ -103,7 +104,7 @@ and open the template in the editor.
             
                                      }
                                      ?> 
-                                    <option value="2" selected=<?php $flag2; ?>> 2</option>
+                                    <option value="2" selected="<?php echo $flag2; ?>"> 2</option>
                                     
                                     <?php 
                                     while ($row = $floor->fetch_assoc()) {
@@ -118,7 +119,7 @@ and open the template in the editor.
             
                                      }
                                      ?> 
-                                    <option value="3" selected=<?php $flag3; ?>> 3</option>
+                                    <option value="3" selected="<?php echo $flag3; ?>"> 3</option>
                                     
                                     <?php 
                                     while ($row = $floor->fetch_assoc()) {
@@ -133,7 +134,7 @@ and open the template in the editor.
             
                                      }
                                      ?> 
-                                    <option value="4" selected=<?php $flag4; ?> > 4</option>
+                                    <option value="4" selected="<?php echo $flag4; ?>" > 4</option>
                                     
                                     <?php 
                                     while ($row = $floor->fetch_assoc()) {
@@ -148,7 +149,7 @@ and open the template in the editor.
             
                                      }
                                      ?> 
-                                    <option value="5" selected=<?php $flag5; ?> > 5</option>
+                                    <option value="5" selected="<?php echo $flag5; ?>" > 5</option>
                                     
                                     <?php 
                                     while ($row = $floor->fetch_assoc()) {
@@ -163,7 +164,7 @@ and open the template in the editor.
             
                                      }
                                      ?> 
-                                    <option value="6" selected=<?php $flag6; ?>> 6</option>
+                                    <option value="6" selected="<?php echo $flag6; ?>"> 6</option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -174,14 +175,17 @@ and open the template in the editor.
                             </div>
                             <div class="form-group">
                                 <label>Number of Beds</label>
-                                <input class="form-control" type="text" value="<?php while ($row = $type->fetch_assoc()) {
-            echo $row['roomTypeId'] ;
+                                <input class="form-control" type="text" value="<?php while ($row = $beds->fetch_assoc()) {
+            echo $row['numberOfBeds'] ;
             
         } ?>">
                             </div>
                             <div class="form-group">
                                 <label>Cost Per Day</label>
-                                <input class="form-control" type="text">
+                                <input class="form-control" type="text" value="<?php while ($row = $cost->fetch_assoc()) {
+            echo $row['costPerDay'] ;
+            
+        } ?>">
                             </div>
                             <div class="m-t-20 text-center">
                                 <button class="btn btn-primary submit-btn">Save Room</button>

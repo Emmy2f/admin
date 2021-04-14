@@ -253,7 +253,7 @@
             $dob =  $_POST['txtdob'];
             $doj = $_POST['txtdoj'] ;
             $marital = $_POST['txtmarital'];
-            echo "<script>alert('$dob $doj')</script>";
+           /* echo "<script>alert('$dob $doj')</script>";
 
             global $con;
             $qry = $con->query("insert into staffMaster(staffFName,staffMName,staffLName,contactNumber,email,gender,address,"
@@ -265,7 +265,7 @@
                 echo "<script>alert('Data Inserted')</script>";
             } else {
                 echo "<script>alert('Data Not Inserted')</script>";
-            }
+            }*/
         }
         ?>
 

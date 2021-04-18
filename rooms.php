@@ -62,14 +62,14 @@ and open the template in the editor.
                                 . "<td>" . $row['description'] . "</td>"
                                 ."<td>
                                             
-                                    <form action='edit-room.php' method='post'><input type='hidden' name='roomnumber' value='$row[roomNumber]'><input type='submit' name='edit' value='Edit'></form>
+                                    <form action='edit-room.php' method='post'><input type='hidden' name='roomnumber' value='$row[roomnumber]'><input type='submit' name='edit' value='Edit'></form>
                                     
                                                
                                         </td>"
                                   ."<td>
                                             
                                     
-                                    <form action='#' method='post'><input type='hidden' name='roomnumber' value='$row[roomNumber]'><input type='submit' name='edit' value='Delete'></form>
+                                    <form action='#' method='post'><input type='hidden' name='roomNumber' value='$row[roomNumber]'><input type='submit' name='edit' value='Delete'></form>
                                                
                                         </td>"          
                                 . "</tr>";

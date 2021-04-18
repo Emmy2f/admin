@@ -16,19 +16,24 @@ and open the template in the editor.
         <?php
         include_once 'commonMethods.php';
         doDBConnect();
+        
         ?>
+      
     </head>
-    <body><?php
-        global $con;
-        $room = $_POST['roomnumber'];
-        $floor = $con->query("select floor from roomMaster where roomNumber=$room;");
-        $type = $con->query("select roomTypeId from roomMaster where roomNumber=$room;");
-        $beds = $con->query("select numberOfBeds from roomMaster where roomNumber=$room;");
-         $cost = $con->query("select costPerDay from roomMaster where roomNumber=$room;");
-       
-        //echo "<script>alert($floor)</script>";
-        ?>
+    <body>
+<?php 
 
+$room=$_POST['roomnumber'];
+echo "<script>alert('$room')</script>";
+ $qry = $con->query("select * from roomMaster where roomNumber=$room;");
+while ($row = $qry->fetch_assoc()) {
+            $beds=$row['numberOfBeds'];
+            $floor=$row['floor'];
+            $cost=$row['costPerDay'];
+            $type=$row['roomTypeId'];
+        }
+        
+?>
         <div class="page-wrapper">
 
             <div class="content">
@@ -39,158 +44,128 @@ and open the template in the editor.
                 </div>
                 <div class="row">
                     <div class="col-lg-8 offset-lg-2">
-                        <form>
+                        <form method="post" action="edit-room.php">
                             <div class="form-group">
                                 <label>Room Number</label>
-                                <input class="form-control" type="text" value="<?php echo $room ?>"n disabled="true">
+                                <input class="form-control" name='txtrnum' type="text" value="<?php echo $room ?>"n disabled="true">
                             </div>
 
                             <div class="form-group">
                                 <label>Floor</label>
-                                <select class="form-control" >
-                                    <?php 
-                                    while ($row = $floor->fetch_assoc()) {
-                                        if($row['floor'] =="select")
-                                        {
-                                            $flag=true;
-                                        }
-                                        else
-                                        {
-                                            $flag=false;
-                                        };
-            
-                                     }
-                                     ?> 
-                                    <option value="select" selected="<?php echo $flag ?>" > select</option>
-                                    <?php 
-                                    while ($row = $floor->fetch_assoc()) {
-                                        if($row['floor'] =="Ground")
-                                        {
-                                            $flagg=true;
-                                        }
-                                        else
-                                        {
-                                            $flagg=false;
-                                        };
-            
-                                     }
-                                     ?> 
-                                    <option value="Ground" selected="<?php echo $flagg; ?>"> Ground</option>
-                                    <?php 
-                                    while ($row = $floor->fetch_assoc()) {
-                                        if($row['floor'] =="1")
-                                        {
-                                            $flag1=true;
-                                        }
-                                        else
-                                        {
-                                            $flag1=false;
-                                        };
-            
-                                     }
-                                     ?> 
-                                    <option value="1" selected="<?php echo $flag1; ?>"> 1</option>
+                                <select class="form-control" name='txtfloor'>
                                     
-                                    <?php 
-                                    while ($row = $floor->fetch_assoc()) {
-                                        if($row['floor'] =="2")
+                                    <option value="select" <?php 
+                                        if($floor=="select")
                                         {
-                                            $flag2=true;
+                                            echo "selected";
                                         }
-                                        else
-                                        {
-                                            $flag2=false;
-                                        };
-            
-                                     }
-                                     ?> 
-                                    <option value="2" selected="<?php echo $flag2; ?>"> 2</option>
                                     
-                                    <?php 
-                                    while ($row = $floor->fetch_assoc()) {
-                                        if($row['floor'] =="3")
+                                     ?> > --Select--</option>
+                                    <option value="Ground" <?php 
+                                   if($floor=="Ground")
                                         {
-                                            $flag3=true;
+                                            echo "selected";
                                         }
-                                        else
-                                        {
-                                            $flag3=false;
-                                        };
-            
-                                     }
-                                     ?> 
-                                    <option value="3" selected="<?php echo $flag3; ?>"> 3</option>
+                                     ?> > Ground</option>
                                     
-                                    <?php 
-                                    while ($row = $floor->fetch_assoc()) {
-                                        if($row['floor'] =="4")
+                                    <option value="1" <?php 
+                                    if($floor=="1")
                                         {
-                                            $flag4=true;
+                                            echo "selected";
                                         }
-                                        else
-                                        {
-                                            $flag4=false;
-                                        };
-            
-                                     }
-                                     ?> 
-                                    <option value="4" selected="<?php echo $flag4; ?>" > 4</option>
+                                     ?> > 1</option>
                                     
-                                    <?php 
-                                    while ($row = $floor->fetch_assoc()) {
-                                        if($row['floor'] =="5")
+                                     <option value="2" <?php 
+                                    if($floor=="2")
                                         {
-                                            $flag5=true;
+                                            echo "selected";
                                         }
-                                        else
-                                        {
-                                            $flag5=false;
-                                        };
-            
-                                     }
-                                     ?> 
-                                    <option value="5" selected="<?php echo $flag5; ?>" > 5</option>
+                                     ?> > 2</option>
                                     
-                                    <?php 
-                                    while ($row = $floor->fetch_assoc()) {
-                                        if($row['floor'] =="6")
+                                      <option value="3" <?php 
+                                   if($floor=="3")
                                         {
-                                            $flag6=true;
+                                            echo "selected";
                                         }
-                                        else
+                                     ?> > 3</option>
+                                      
+                                       <option value="4" <?php 
+                                   if($floor=="4")
                                         {
-                                            $flag6=false;
-                                        };
-            
-                                     }
-                                     ?> 
-                                    <option value="6" selected="<?php echo $flag6; ?>"> 6</option>
+                                            echo "selected";
+                                        }
+                                     ?> > 4</option>
+                                       
+                                        <option value="5" <?php 
+                                   if($floor=="5")
+                                        {
+                                            echo "selected";
+                                        }
+                                     ?> > 5</option>
+                                        
+                                         <option value="6" <?php 
+                                   if($floor=="6")
+                                        {
+                                            echo "selected";
+                                        }
+                                     ?> > 6</option>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label>Room Type</label>
-                                <select class="form-control" >
-                                    <option></option>
+                                <select class="form-control" name='txttype' >
+                                    <option value="select">--Select--</option>
+                                    <?php
+                                    $fetch = $con->query("select * from roomType");
+                                    if ($fetch) {
+
+                                        while ($row = $fetch->fetch_assoc()) {
+                                            $id = $row['roomTypeId'];
+                                            if($id==$type){
+                                                echo "<option value=$id selected>" . $row['roomType'] . "</option>";
+                                            }
+                                            else
+                                            {
+                                            echo "<option value=$id>" . $row['roomType'] . "</option>";
+                                            }
+                                        }
+                                    }
+                                    ?>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label>Number of Beds</label>
-                                <input class="form-control" type="text" value="<?php while ($row = $beds->fetch_assoc()) {
-            echo $row['numberOfBeds'] ;
-            
-        } ?>">
+                                <input class="form-control" name='txtbeds' type="text" value="<?php echo $beds;?>">
                             </div>
                             <div class="form-group">
                                 <label>Cost Per Day</label>
-                                <input class="form-control" type="text" value="<?php while ($row = $cost->fetch_assoc()) {
-            echo $row['costPerDay'] ;
-            
-        } ?>">
+                                <input class="form-control" name='txtcost' type="text" value="<?php  echo $cost;?>">
                             </div>
                             <div class="m-t-20 text-center">
-                                <button class="btn btn-primary submit-btn">Save Room</button>
+                                <button name="btnsave" class="btn btn-primary submit-btn">Save Room</button>
                             </div>
                         </form>
+                        <?php
+                            /*if(isset($_POST['btnsave']))
+                            {
+                                $rnum=$_POST['txtrnum'];
+                                $floor=$_POST['txtfloor'];
+                                $type=$_POST['txttype'];
+                                $beds=$_POST['txtbeds'];
+                                $cost=$_POST['txtcost'];
+                                
+                                $uqry=$con->query("UPDATE roomMaster SET 'floor'=$floor, 'roomTypeId'=$type, 'numberOfBeds'=$beds"
+                                        . ",'costPerDay'=$cost where 'roomNumber'=$rnum");
+                                if($uqry==true)
+                                {
+                                    echo "<script>alert('Data updated')</script>";
+                                }
+                                else
+                                {
+                                    echo "<script>alert('Data not updated')</script>";
+                                }
+                            }*/
+                        ?>
                     </div>
                 </div>
             </div>

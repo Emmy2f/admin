@@ -62,7 +62,7 @@ and open the template in the editor.
                                 . "<td>" . $row['description'] . "</td>"
                                 ."<td>
                                             
-                                    <form action='edit-room.php' method='post'><input type='hidden' name='roomnumber' value='$row[roomnumber]'><input type='submit' name='edit' value='Edit'></form>
+                                     <form action='edit-room.php' method='post'><input type='hidden' name='roomNumber' value='$row[roomNumber]'><input type='submit' name='edit' value='Edit'></form>
                                     
                                                
                                         </td>"
@@ -115,7 +115,8 @@ and open the template in the editor.
                                             <div class='dropdown dropdown-action'>
                                                 <a href='#' class='action-icon dropdown-toggle' data-toggle='dropdown' aria-expanded='false'><i class='fa fa-ellipsis-v'></i></a>
                                                 <div class='dropdown-menu dropdown-menu-right'>
-                                                    <a class='dropdown-item' href='edit-room.php'><i class='fa fa-pencil m-r-5'></i> Edit</a>
+                                                
+                                                    <a class='dropdown-item' href='edit-room.php?i=$row[roomNumber];'><i class='fa fa-pencil m-r-5'></i> Edit</a>
                                                     <a class=dropdown-item href='#' data-toggle='modal' data-target='#delete_department'><i class='fa fa-trash-o m-r-5'></i> Delete</a>
                                                 </div>
                                             </div>

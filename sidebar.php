@@ -16,17 +16,15 @@
                             <a href="index.php"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                         </li>
 						<li>
-                                                    <a href="register-staff.php"><i class="fa fa-user-md"></i> <span>Register Staff</span></a>
+                                                    <a href="staff.php"><i class="fa fa-user-md"></i> <span>Manage Staff</span></a>
                         </li>
                         <li>
-                            <a href="register-doctor.php"><i class="fa fa-wheelchair"></i> <span>Register Doctor</span></a>
+                            <a href="register-doctor.php"><i class="fa fa-wheelchair"></i> <span>Manage Doctor</span></a>
                         </li>
                         <li>
                             <a href="appointments.html"><i class="fa fa-calendar"></i> <span>Manage Department</span></a>
                         </li>
-                        <li>
-                            <a href="appointments.html"><i class="fa fa-calendar"></i> <span>Manage Staff</span></a>
-                        </li>
+                        
                         <li>
                             <a href="manage-room.php"><i class="fa fa-calendar-check-o"></i> <span>Manage Room</span></a>
                         </li>
@@ -38,6 +36,9 @@
                         </li>
                         <li>
                             <a href="departments.html"><i class="fa fa-hospital-o"></i> <span>Manage Health Library</span></a>
+                        </li>
+                        <li>
+                            <a href="departments.html"><i class="fa fa-hospital-o"></i> <span>Manage Achievements</span></a>
                         </li>
                     </ul>
                 </div>

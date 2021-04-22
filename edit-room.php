@@ -1,5 +1,4 @@
-<?php session_start();
-?>
+
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -24,7 +23,7 @@ and open the template in the editor.
 <?php 
 
 $room=$_POST['roomnumber'];
-echo "<script>alert('$room')</script>";
+//echo "<script>alert('$room')</script>";
  $qry = $con->query("select * from roomMaster where roomNumber=$room;");
 while ($row = $qry->fetch_assoc()) {
             $beds=$row['numberOfBeds'];
@@ -146,7 +145,7 @@ while ($row = $qry->fetch_assoc()) {
                             </div>
                         </form>
                         <?php
-                            /*if(isset($_POST['btnsave']))
+                            if(isset($_POST['btnsave']))
                             {
                                 $rnum=$_POST['txtrnum'];
                                 $floor=$_POST['txtfloor'];
@@ -164,7 +163,7 @@ while ($row = $qry->fetch_assoc()) {
                                 {
                                     echo "<script>alert('Data not updated')</script>";
                                 }
-                            }*/
+                            }
                         ?>
                     </div>
                 </div>

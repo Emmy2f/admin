@@ -218,7 +218,19 @@
                                                 </font></p>
                                         </div>
                                     </div>
-
+<div class="col-sm-4">
+									<div class="form-group">
+										<label>Upload Photo</label>
+										<div class="profile-upload">
+											<div class="upload-img">
+												<img alt="" src="assets/img/user.jpg">
+											</div>
+											<div class="upload-input">
+												<input type="file" class="form-control">
+											</div>
+										</div>
+									</div>
+                                </div>
 
                                 </div>
                                 

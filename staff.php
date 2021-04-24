@@ -74,7 +74,7 @@ and open the template in the editor.
                                 . "<td>" . $row['maritalStatues'] . "</td>"
                                 ."<td>
                                             
-                                    <form action='editstaff.php' method='post'><input type='hidden' name='staffid' value='$row[staffID]'><input type='submit' name='edit' value='Edit'></form>
+                                    <form action='edit-staff.php' method='post'><input type='hidden' name='staffid' value='$row[staffID]'><input type='submit' name='edit' value='Edit'></form>
                                     
                                                
                                         </td>"

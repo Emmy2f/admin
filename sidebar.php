@@ -22,11 +22,11 @@
                             <a href="register-doctor.php"><i class="fa fa-wheelchair"></i> <span>Manage Doctor</span></a>
                         </li>
                         <li>
-                            <a href="appointments.html"><i class="fa fa-calendar"></i> <span>Manage Department</span></a>
+                            <a href="add-department.php"><i class="fa fa-calendar"></i> <span>Manage Department</span></a>
                         </li>
                         
                         <li>
-                            <a href="manage-room.php"><i class="fa fa-calendar-check-o"></i> <span>Manage Room</span></a>
+                            <a href="rooms.php"><i class="fa fa-calendar-check-o"></i> <span>Manage Room</span></a>
                         </li>
                         <li>
                             <a href="departments.html"><i class="fa fa-hospital-o"></i> <span>Manage Bed</span></a>

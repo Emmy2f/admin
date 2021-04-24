@@ -18,7 +18,7 @@
     <body>
         <?php
         doDBConnect();
-        $err_fname = $err_mname = $err_lname = $err_contact = $err_email = "";
+        $err_fname = $err_mname = $err_lname = $err_reg = $err_contact = $err_email = $err_gender = $err_address = $err_marital = $err_dob = $err_doj = $err_spec = $err_quali = $err_img="";
         ?>
         <div class="main-wrapper">
 
@@ -32,7 +32,7 @@
                     </div>
                     <div class="row">
                         <div class="col-lg-8 offset-lg-2">
-                            <form method="post">
+                            <form method="post" enctype="multipart/form-data">
                                 <div class="row">
 
                                     <div class="col-sm-4">
@@ -42,7 +42,9 @@
                                             <p><font color="red">
                                                 <?php
                                                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                                                    if ((!preg_match("/^[a-zA-z]+$/", $_POST['txtfname']))) {
+                                                    if (empty($_POST['txtfname'])) {
+                                                        $err_fname = "First Name is required";
+                                                    } else if ((!preg_match("/^[a-zA-z]+$/", $_POST['txtfname']))) {
                                                         $err_fname = "Invalid data";
                                                     } else {
                                                         $err_fname = '';
@@ -60,7 +62,9 @@
                                             <p><font color="red">
                                                 <?php
                                                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                                                    if ((!preg_match("/^[a-zA-z]+$/", $_POST['txtmname']))) {
+                                                    if (empty($_POST['txtmname'])) {
+                                                        $err_mname = "Middle Name is required";
+                                                    } else if ((!preg_match("/^[a-zA-z]+$/", $_POST['txtmname']))) {
                                                         $err_mname = "Invalid data";
                                                     } else {
                                                         $err_mname = '';
@@ -79,7 +83,9 @@
                                             <p><font color="red">
                                                 <?php
                                                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                                                    if ((!preg_match("/^[a-zA-z]+$/", $_POST['txtlname']))) {
+                                                    if (empty($_POST['txtlname'])) {
+                                                        $err_lname = "Last Name is required";
+                                                    } else if ((!preg_match("/^[a-zA-z]+$/", $_POST['txtlname']))) {
                                                         $err_lname = "Invalid data";
                                                     } else {
                                                         $err_lname = '';
@@ -97,9 +103,15 @@
                                             <p><font color="red">
                                                 <?php
                                                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                                                    
+                                                    if (empty($_POST['txtrnum'])) {
+                                                        $err_reg = "Registration Number is required";
+                                                    } else if ((!preg_match("/[0-9][0-9][0-9][0-9]$/", $_POST['txtrnum']))) {
+                                                        $err_reg = "Invalid data";
+                                                    } else {
+                                                        $err_reg = '';
+                                                    }
                                                 }
-                                                
+                                                echo $err_reg;
                                                 ?>
                                                 </font></p>
                                         </div>
@@ -111,7 +123,9 @@
                                             <p><font color="red">
                                                 <?php
                                                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                                                    if ((!preg_match("/^[0-9]{10}+$/", $_POST['txtcontact']))) {
+                                                    if (empty($_POST['txtcontact'])) {
+                                                        $err_contact = "Contact Number  is required";
+                                                    } else if ((!preg_match("/^[0-9]{10}+$/", $_POST['txtcontact']))) {
                                                         $err_contact = "Contact Number must be of 10 digits";
                                                     } else {
                                                         $err_contact = '';
@@ -129,7 +143,9 @@
                                             <p><font color="red">
                                                 <?php
                                                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                                                    if (!filter_var($_POST['txtemail'], FILTER_VALIDATE_EMAIL)) {
+                                                    if (empty($_POST['txtemail'])) {
+                                                        $err_email = "Email is required";
+                                                    } else if (!filter_var($_POST['txtemail'], FILTER_VALIDATE_EMAIL)) {
                                                         $err_email = "Email format not valid";
                                                     } else {
                                                         $err_email = '';
@@ -153,20 +169,55 @@
                                                     <input type="radio" name="txtgender" class="form-check-input" value=1>Female
                                                 </label>
                                             </div>
+                                            <p><font color="red">
+                                                <?php
+                                                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                                                    if (!isset($_POST['txtgender'])) {
+                                                        $err_gender = "Gender is required";
+                                                    } else {
+                                                        $err_gender = '';
+                                                    }
+                                                }
+                                                echo $err_gender;
+                                                ?>
+                                                </font></p>
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label>Date of Birth</label>
                                             <div>
-                                                <input name="txtdob" type="date" class="form-control datetimepicker">
+                                                <input name="txtdob" type="date" class="form-control">
                                             </div>
+                                            <p><font color="red">
+                                                <?php
+                                                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                                                    $bday = new DateTime($_POST['txtdob']);
+                                                    $today = new DateTime(date('m.d.y'));
+                                                    $diff = $today->diff($bday);
+                                                    if (empty($_POST['txtdob'])) {
+                                                        $err_dob = "Date of Birth is required";
+                                                    } else if ($_POST['txtdob'] > date("Y-m-d")) {
+                                                        $err_dob = "Date of Birth cannot be greater than current date";
+                                                    } else if (($diff->y) < 18) {
+                                                        $err_dob = "Age should be atleast 18 years";
+                                                    } else {
+                                                        $err_dob = '';
+                                                    }
+                                                }
+                                                echo $err_dob;
+                                                ?>
+                                                </font></p>
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label>Age <span class="text-danger"></span></label>
-                                            <input name="txtage" class="form-control" type="text">
+                                            <input name="txtage" class="form-control" type="text" value=<?php
+                                            if (!empty($_POST['txtdob'])) {
+                                                echo $diff->y;
+                                            }
+                                            ?> >
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
@@ -174,17 +225,42 @@
                                             <label>Address</label>
 
                                             <input name="txtaddress" type="text" class="form-control ">
-
+                                            <p><font color="red">
+                                                <?php
+                                                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                                                    if (empty($_POST['txtaddress'])) {
+                                                        $err_address = "Address is required";
+                                                    } else if ((!preg_match("/^[a-zA-z0-9 ]+$/", $_POST['txtaddress']))) {
+                                                        $err_address = "Address is not valid";
+                                                    } else {
+                                                        $err_address = '';
+                                                    }
+                                                }
+                                                echo $err_address;
+                                                ?>
+                                                </font></p>
                                         </div>
                                     </div>
 
-                                    
+
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label>Date of Joining</label>
-                                            
-                                                <input name="txtdoj" type="date" class="form-control datetimepicker">
-                                            
+
+                                            <input name="txtdoj" type="date" class="form-control ">
+                                            <p><font color="red">
+                                                <?php
+                                                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+                                                    if (empty($_POST['txtdoj'])) {
+                                                        $err_doj = "Date of Joining is required";
+                                                    } else {
+                                                        $err_doj = '';
+                                                    }
+                                                }
+                                                echo $err_dob;
+                                                ?>
+                                                </font></p>
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
@@ -200,118 +276,198 @@
                                                     <input type="radio" name="txtmarital" value=1 class="form-check-input">Married
                                                 </label>
                                             </div>
+                                            <p><font color="red">
+                                                <?php
+                                                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                                                    if (!isset($_POST['txtmarital'])) {
+                                                        $err_marital = "Marital Status is required";
+                                                    } else {
+                                                        $err_marital = '';
+                                                    }
+                                                }
+                                                echo $err_marital;
+                                                ?>
+                                                </font></p>
                                         </div>
                                     </div>
 
                                     <div class="col-sm-4">
                                         <div class="form-group">
-                                            <label>Select Specialization<span class="text-danger"></span></label>
-                                            <br><select>
+                                            <label>Select Qualification<span class="text-danger"></span></label>
+                                            <br>
+                                            <select class="form-control" name="txtquali">
+                                                <option value="select">--Select--</option>
+                                                <?php
+                                                $fetch = $con->query("select * from qualificationMaster");
+                                                if ($fetch) {
+
+                                                    while ($row = $fetch->fetch_assoc()) {
+                                                        $id = $row['qualificationId'];
+                                                        echo "<option value=$id>" . $row['name'] . "</option>";
+                                                    }
+                                                }
+                                                ?>
                                             </select>
                                             <p><font color="red">
                                                 <?php
                                                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                                                    
+                                                    if ($_POST['txtquali'] == "select") {
+                                                        $err_quali = "Qualification is required";
+                                                    } else {
+                                                        $err_quali = "";
+                                                    }
                                                 }
-                                                
+                                                echo $err_quali;
                                                 ?>
                                                 </font></p>
                                         </div>
                                     </div>
-<div class="col-sm-4">
-									<div class="form-group">
-										<label>Upload Photo</label>
-										<div class="profile-upload">
-											<div class="upload-img">
-												<img alt="" src="assets/img/user.jpg">
-											</div>
-											<div class="upload-input">
-												<input type="file" class="form-control">
-											</div>
-										</div>
-									</div>
-                                </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label>Select Specialization<span class="text-danger"></span></label>
+                                            <br>
+                                            <select class="form-control" name="txtspec">
+                                                <option value="select">--Select--</option>
+                                                <?php
+                                                $fetch = $con->query("select * from specializationMaster");
+                                                if ($fetch) {
 
-                                </div>
-                                
+                                                    while ($row = $fetch->fetch_assoc()) {
+                                                        $id = $row['specializationID'];
+                                                        echo "<option value=$id>" . $row['specializationName'] . "</option>";
+                                                    }
+                                                }
+                                                ?>
+                                            </select>
+                                            <p><font color="red">
+                                                <?php
+                                                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                                                    if ($_POST['txtspec'] == "select") {
+                                                        $err_spec = "Specialization is required";
+                                                    } else {
+                                                        $err_spec = "";
+                                                    }
+                                                }
+                                                echo $err_spec;
+                                                ?>
+                                                </font></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label>Upload Photo</label>
+                                            <div class="profile-upload">
+                                                <div class="upload-img">
+                                                    <img alt="" src="assets/img/user.jpg">
+                                                </div>
+                                                <div class="upload-input">
+                                                    <input type="file" name="fileToUpload" id="fileToUpload" class="form-control">
+                                                </div>
+                                            </div>
+                                            <p><font color="red">
+                                                <?php
+                                                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                                                    $target_dir = "doctor/";
+                                                    $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+                                                    $uploadOk = 1;
+                                                    $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+                                                    // Check if image file is a actual image or fake image
+                                                    $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+                                                    if ($check !== false) {
 
-                                <div class="m-t-20 text-center">
-                                    <input name="btnregdoc" type="submit" value="Register Doctor" class="btn btn-primary submit-btn">
-                                </div>
-                            </form>
+                                                        $uploadOk = 1;
+                                                    } else {
+                                                        echo "File is not an image.";
+                                                        $uploadOk = 0;
+                                                    }
+
+                                                    // Check if file already exists
+                                                    if (file_exists($target_file)) {
+                                                        echo "Sorry, file already exists.";
+                                                        $uploadOk = 0;
+                                                    }
+
+                                                    // Check file size
+                                                    if ($_FILES["fileToUpload"]["size"] > 500000) {
+                                                        echo "Sorry, your file is too large.";
+                                                        $uploadOk = 0;
+                                                    }
+
+// Allow certain file formats
+                                                    if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
+                                                        echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+                                                        $uploadOk = 0;
+                                                    }
+
+// Check if $uploadOk is set to 0 by an error
+                                                    if ($uploadOk == 0) {
+                                                        echo "Sorry, your file was not uploaded.";
+// if everything is ok, try to upload file
+                                                    } else {
+                                                        if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+                                                            $err_img="";
+                                                            //echo "The file " . htmlspecialchars(basename($_FILES["fileToUpload"]["name"])) . " has been uploaded.";
+                                                        } else {
+                                                            $err_img="error";
+                                                            echo "Sorry, there was an error uploading your file.";
+                                                        }
+                                                }}
+                                                    ?>
+                                                    </font></p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="m-t-20 text-center">
+                                        <input name="btnregdoc" type="submit" value="Register Doctor" class="btn btn-primary submit-btn">
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="content table-responsive">
-                    <table class="table table-bordered table-striped">
-                        <tr>
-                            <th>Doctor ID</th>
-                            <th>First Name</th>
-                            <th>Middle Name</th>
-                            <th>Last Name</th>
-                            <th>Registration Number</th>
-                            <th>Contact Number</th>
-                            <th>Email</th>
-                            <th>Gender</th>
-                            <th>Date of Birth</th>
-                            <th>Address</th>
-                            
-                            <th>Date of Joining</th>
-                            <th>Marital Status</th>
-                        </tr>
-                        <?php
-                        $sqry = $con->query("select * from staffMaster;");
-                        if ($sqry) {
 
-                            while ($row = $sqry->fetch_assoc()) {
-                                echo "<tr><td>" . $row['staffID'] . "</td>"
-                                . "<td>" . $row['staffFName'] . "</td>"
-                                . "<td>" . $row['staffMName'] . "</td>"
-                                . "<td>" . $row['staffLName'] . "</td>"
-                                . "<td>" . $row['contactNumber'] . "</td>"
-                                . "<td>" . $row['email'] . "</td>"
-                                . "<td>" . $row['gender'] . "</td>"
-                                . "<td>" . $row['address'] . "</td>"
-                                . "<td>" . $row['dateOfBirth'] . "</td>"
-                                . "<td>" . $row['dateOfJoining'] . "</td>"
-                                . "<td>" . $row['maritalStatues'] . "</td>"
-                                . "</tr>";
-                            }
-                            echo "</table>";
-                        }
-                        ?>
-                    </table>
                 </div>
             </div>
-        </div>
-        <?php
-        if (isset($_POST['btnregdoc'])) {
-            //echo "<script>alert('button clicked')</script>";
-            $fname = $_POST['txtfname'];
-            $mname = $_POST['txtmname'];
-            $lname = $_POST['txtlname'];
-            $contact = $_POST['txtcontact'];
-            $email = $_POST['txtemail'];
-            $gender = $_POST['txtgender'];
-            $address = $_POST['txtaddress'];
-            $dob =  $_POST['txtdob'].date("Y/m/d") ;
-            $doj = $_POST['txtdoj']. date("Y/m/d") ;
-            $marital = $_POST['txtmarital'];
-            //echo "<script>alert('$dob $doj')</script>";
+            <?php
+              if (isset($_POST['btnregdoc'])) {
+                  if(        $err_fname =="" && $err_mname =="" && $err_lname =="" && $err_reg =="" && $err_contact =="" && $err_email =="" && $err_gender =="" && $err_address =="" && $err_marital =="" && $err_dob =="" && $err_doj =="" && $err_spec =="" && $err_quali =="" && $err_img=="")
+                  {
+              //echo "<script>alert('button clicked')</script>";
+              $fname = $_POST['txtfname'];
+              $mname = $_POST['txtmname'];
+              $lname = $_POST['txtlname'];
+              $regno=$_POST['txtrnum'];
+              $contact = $_POST['txtcontact'];
+              $email = $_POST['txtemail'];
+              $gender = $_POST['txtgender'];
+                            $dob = $_POST['txtdob'] ;
 
-            global $con;
-            $qry = $con->query("insert into staffMaster(staffFName,staffMName,staffLName,contactNumber,email,gender,address,"
-                    . "dateOfBirth,dateOfJoining,maritalStatues) values('$fname','$mname','$lname','$contact','$email',"
-                    . "'$gender','$address','$dob','$doj','$marital')");
-            //echo "<script>alert('$qry')</script>";
+              $address = $_POST['txtaddress'];
+              $doj = $_POST['txtdoj'] ;
+              $marital = $_POST['txtmarital'];
+              $quali=$_POST['txtquali'];
+              $spec=$_POST['txtspec'];
+              $img=$target_file;
 
-            if ($qry == true) {
-                echo "<script>alert('Data Inserted')</script>";
-            } else {
-                echo "<script>alert('Data Not Inserted')</script>";
-            }
-        }
-        ?>
+              global $con;
+              $qry = $con->query("insert into doctorMaster(firstName,middleName,lastName,registrationNumber,contactNumber,email,gender,"
+              . "dateOfBirth,address,dateOfJoining,marital,qualificationID,specializationID,uploadedImage) values('$fname','$mname','$lname','$regno','$contact','$email',"
+              . "'$gender','$dob','$address','$doj','$marital','$quali','$spec','$img')");
+              //echo "<script>alert('$qry')</script>";
+
+              if ($qry == true) {
+              echo "<script>alert('Data Inserted')</script>";
+              } else {
+              echo "<script>alert('Data Not Inserted')</script>";
+                  }}
+                  else {
+
+        echo "<script>alert('Form is not filled correctly')</script>";
+    }
+              } 
+            ?>
 
 
     </body>

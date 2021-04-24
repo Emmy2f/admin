@@ -13,6 +13,7 @@ and open the template in the editor.
         <?php include 'sidebar.php'; ?>
         <?php
         include_once 'commonMethods.php';
+        doDBConnect();
         ?>
     </head>
     <body>
@@ -34,9 +35,19 @@ and open the template in the editor.
                            
                             <div class="form-group">
                                 <label>Department Head</label>
-                                <select class="form-control">
-                                    <option></option>
-                                </select>
+                                <select class="form-control" name="txthead">
+                                                <option value="select">--Select--</option>
+                                                <?php
+                                                $fetch = $con->query("select * from doctorMaster");
+                                                if ($fetch) {
+
+                                                    while ($row = $fetch->fetch_assoc()) {
+                                                        $id = $row['doctorId'];
+                                                        echo "<option value=$id>" . $row['firstName'] . " ".$row['lastName']. "</option>";
+                                                    }
+                                                }
+                                                ?>
+                                            </select>
                             </div>
                             <div class="form-group">
                                 <label>Contact Number</label>

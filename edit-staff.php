@@ -19,7 +19,7 @@ and open the template in the editor.
         ?>
         <?php
         $err_fname = $err_mname = $err_lname = $err_contact = $err_email = $err_gender = $err_address = $err_marital = $err_dob = $err_doj = "";
-            $staffId=$_POST['staffid'];
+            $staffId=$_POST['editid'];
              $qry = $con->query("select * from staffMaster where staffID=$staffId;");
 while ($row = $qry->fetch_assoc()) {
             $fname=$row['staffFName'];

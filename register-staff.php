@@ -173,7 +173,7 @@
                                                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                     if (empty($_POST['txtaddress'])) {
                                                         $err_address = "Address is required";
-                                                    } else if ((!preg_match("/^[a-zA-z0-9 ]+$/", $_POST['txtaddress']))) {
+                                                    } else if ((!preg_match("/^[a-zA-z0-9, ]+$/", $_POST['txtaddress']))) {
                                                         $err_address = "Address is not valid";
                                                     } else {
                                                         $err_address = '';
@@ -212,7 +212,7 @@
                                                 </font></p>
                                         </div>
                                     </div>
-                                    <div class="col-sm-4">
+                                    <!--<div class="col-sm-4">
                                         <div class="form-group">
                                             <label>Age <span class="text-danger"></span></label>
                                             <input name="txtage" class="form-control" type="text" value=<?php
@@ -221,7 +221,7 @@
                                             }
                                             ?> >
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label>Date of Joining</label>
@@ -375,7 +375,9 @@
                 </div>
 
             </div>
+            
         </div>
+        
         <?php
         if (isset($_POST['btnregstaff'])) {
 

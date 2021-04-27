@@ -1,6 +1,4 @@
-<?php session_start();
-$_SESSION['room']="heello";
-?>
+
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.

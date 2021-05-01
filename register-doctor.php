@@ -1,4 +1,9 @@
-<!DOCTYPE html>
+<?php session_start() ;
+    if(!isset($_SESSION['admin']))
+    {
+        header("Location:index.php");
+    }
+?><!DOCTYPE html>
 <html lang="en">
 
 
@@ -18,7 +23,7 @@
     <body>
         <?php
         doDBConnect();
-        $err_fname = $err_mname = $err_lname = $err_reg = $err_contact = $err_email = $err_gender = $err_address = $err_marital = $err_dob = $err_doj = $err_spec = $err_quali = $err_img="";
+        $err_fname = $err_mname = $err_lname = $err_reg = $err_contact = $err_email = $err_gender = $err_address = $err_marital = $err_dob = $err_doj = $err_spec = $err_quali = $err_img=$err_pass="";
         ?>
         <div class="main-wrapper">
 
@@ -210,16 +215,26 @@
                                                 </font></p>
                                         </div>
                                     </div>
-                                   <!-- <div class="col-sm-4">
+                                   <div class="col-sm-4">
                                         <div class="form-group">
-                                            <label>Age <span class="text-danger"></span></label>
-                                            <input name="txtage" class="form-control" type="text" value=<?php
-                                            if (!empty($_POST['txtdob'])) {
-                                                echo $diff->y;
-                                            }
-                                            ?> >
+                                            <label>Password <span class="text-danger"></span></label>
+                                            <input name="txtpass" class="form-control" type="password">
+                                            <p><font color="red">
+                                                <?php
+                                                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                                                    if (empty($_POST['txtpass'])) {
+                                                        $err_pass = "Password is required";
+                                                    } else if ((!preg_match("/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,8}/", $_POST['txtpass']))) {
+                                                        $err_pass = "Password is not valid";
+                                                    } else {
+                                                        $err_pass = '';
+                                                    }
+                                                }
+                                                echo $err_pass;
+                                                ?>
+                                                </font></p>
                                         </div>
-                                    </div>-->
+                                    </div>
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <label>Address</label>
@@ -432,7 +447,7 @@
             </div>
             <?php
               if (isset($_POST['btnregdoc'])) {
-                  if(        $err_fname =="" && $err_mname =="" && $err_lname =="" && $err_reg =="" && $err_contact =="" && $err_email =="" && $err_gender =="" && $err_address =="" && $err_marital =="" && $err_dob =="" && $err_doj =="" && $err_spec =="" && $err_quali =="" && $err_img=="")
+                  if(        $err_fname =="" && $err_mname =="" && $err_lname =="" && $err_reg =="" && $err_contact =="" && $err_email =="" && $err_gender =="" && $err_address =="" && $err_marital =="" && $err_dob =="" && $err_doj =="" && $err_spec =="" && $err_quali =="" && $err_img=="" && $err_pass=="")
                   {
               //echo "<script>alert('button clicked')</script>";
               $fname = $_POST['txtfname'];
@@ -442,8 +457,8 @@
               $contact = $_POST['txtcontact'];
               $email = $_POST['txtemail'];
               $gender = $_POST['txtgender'];
-                            $dob = $_POST['txtdob'] ;
-
+              $dob = $_POST['txtdob'] ;
+              $password=$_POST['txtpass'];
               $address = $_POST['txtaddress'];
               $doj = $_POST['txtdoj'] ;
               $marital = $_POST['txtmarital'];
@@ -453,8 +468,8 @@
 
               global $con;
               $qry = $con->query("insert into doctorMaster(firstName,middleName,lastName,registrationNumber,contactNumber,email,gender,"
-              . "dateOfBirth,address,dateOfJoining,marital,qualificationID,specializationID,uploadedImage) values('$fname','$mname','$lname','$regno','$contact','$email',"
-              . "'$gender','$dob','$address','$doj','$marital','$quali','$spec','$img')");
+              . "dateOfBirth,password,address,dateOfJoining,marital,qualificationID,specializationID,uploadedImage) values('$fname','$mname','$lname','$regno','$contact','$email',"
+              . "'$gender','$dob','$password','$address','$doj','$marital','$quali','$spec','$img')");
               //echo "<script>alert('$qry')</script>";
 
               if ($qry == true) {

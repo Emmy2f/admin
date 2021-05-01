@@ -1,4 +1,9 @@
-
+<?php session_start() ;
+    if(!isset($_SESSION['admin']))
+    {
+        header("Location:index.php");
+    }
+?>
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.

@@ -1,5 +1,8 @@
-<?php session_start();
-$_SESSION['room']="heello";
+<?php session_start() ;
+    if(!isset($_SESSION['admin']))
+    {
+        header("Location:index.php");
+    }
 ?>
 <!DOCTYPE html>
 <!--

@@ -16,7 +16,7 @@
                             <a href="index.php"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                         </li>
 						<li>
-                                                    <a href="register-staff.php"><i class="fa fa-user-md"></i> <span>Manage Staff</span></a>
+                                                    <a href="staff.php"><i class="fa fa-user-md"></i> <span>Manage Staff</span></a>
                         </li>
                         <li>
                             <a href="register-doctor.php"><i class="fa fa-wheelchair"></i> <span>Manage Doctor</span></a>

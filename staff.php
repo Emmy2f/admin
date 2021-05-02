@@ -1,7 +1,7 @@
 <?php session_start() ;
     if(!isset($_SESSION['admin']))
     {
-        header("Location:index.php");
+        header("Location:login.php");
     }
 ?>
 <!DOCTYPE html>
@@ -64,27 +64,43 @@ and open the template in the editor.
                         if ($sqry) {
 
                             while ($row = $sqry->fetch_assoc()) {
+                                if($row['gender']==0)
+                                {
+                                    $gender="Male";
+                                }
+                                else
+                                {
+                                    $gender="Female";
+                                }
+                                 if($row['maritalStatues']==0)
+                                {
+                                    $marital="Single";
+                                }
+                                else
+                                {
+                                    $marital="Married";
+                                }
                                 echo "<tr><td>" . $row['staffID'] . "</td>"
                                 . "<td>" . $row['staffFName'] . "</td>"
                                 . "<td>" . $row['staffMName'] . "</td>"
                                 . "<td>" . $row['staffLName'] . "</td>"
                                 . "<td>" . $row['contactNumber'] . "</td>"
                                 . "<td>" . $row['email'] . "</td>"
-                                . "<td>" . $row['gender'] . "</td>"
+                                . "<td>" . $gender . "</td>"
                                 . "<td>" . $row['address'] . "</td>"
                                 . "<td>" . $row['dateOfBirth'] . "</td>"
                                 . "<td>" . $row['dateOfJoining'] . "</td>"
-                                . "<td>" . $row['maritalStatues'] . "</td>"
+                                . "<td>" . $marital . "</td>"
                                 ."<td>
                                             
-                                    <form action='edit-staff.php' method='post'><input type='hidden' name='staffid' value='$row[staffID]'><input type='submit' name='edit' value='Edit'></form>
+                                    <form action='edit-staff.php' method='post'><input type='hidden' name='editid' value='$row[staffID]'><input type='submit' name='edit' value='Edit'></form>
                                     
                                                
                                         </td>"
                                   ."<td>
                                             
                                     
-                                    <form action='#' method='post'><input type='hidden' name='staffID' value='$row[staffID]'><input type='submit' name='edit' value='Delete'></form>
+                                    <form action='deletestaffcode.php' method='post'><input type='hidden' name='staffID' value='$row[staffID]'><input type='submit' name='delete' value='Delete'></form>
                                                
                                         </td>"          
                                 . "</tr>";

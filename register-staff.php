@@ -1,7 +1,7 @@
 <?php session_start() ;
     if(!isset($_SESSION['admin']))
     {
-        header("Location:index.php");
+        header("Location:login.php");
     }
 ?><!DOCTYPE html>
 <html lang="en">
@@ -23,7 +23,7 @@
     <body>
         <?php
         doDBConnect();
-        $err_fname = $err_mname = $err_lname = $err_contact = $err_email = $err_gender = $err_address = $err_marital = $err_dob = $err_doj = $err_stype = $err_img = "";
+        $err_fname = $err_mname = $err_lname = $err_contact = $err_email = $err_gender = $err_address = $err_marital = $err_dob = $err_doj = $err_stype = $err_img = $err_pass="";
         ?>
         <div class="main-wrapper">
 
@@ -368,7 +368,26 @@
                                         </div>
                                     </div>
 
-
+<div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label>Password <span class="text-danger"></span></label>
+                                            <input name="txtpass" class="form-control" type="password">
+                                            <p><font color="red">
+                                                <?php
+                                                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                                                    if (empty($_POST['txtpass'])) {
+                                                        $err_pass = "Password is required";
+                                                    } else if ((!preg_match("/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,8}/", $_POST['txtpass']))) {
+                                                        $err_pass = "Password is not valid";
+                                                    } else {
+                                                        $err_pass = '';
+                                                    }
+                                                }
+                                                echo $err_pass;
+                                                ?>
+                                                </font></p>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div class="m-t-20 text-center">
@@ -387,7 +406,7 @@
         if (isset($_POST['btnregstaff'])) {
 
             //echo "<script>alert('$staffID')</script>";
-            if ($err_fname == "" && $err_mname == "" && $err_lname == "" && $err_contact == "" && $err_email == "" && $err_gender == "" && $err_address == "" && $err_marital == "" && $err_dob == "" && $err_doj == "" && $err_stype == "" && $err_img == "") {
+            if ($err_fname == "" && $err_mname == "" && $err_lname == "" && $err_contact == "" && $err_email == "" && $err_gender == "" && $err_address == "" && $err_marital == "" && $err_dob == "" && $err_doj == "" && $err_stype == "" && $err_img == "" && $err_pass=="") {
                 //echo "<script>alert('button clicked')</script>";
                  if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
                                                           
@@ -408,7 +427,8 @@
                 $marital = $_POST['txtmarital'];
                 $stype = $_POST['txtstype'];
                 $simg = $target_file;
-                // echo "<script>alert('$dob $doj')</script>";
+                $password=$_POST['txtpass'];
+                 //echo "<script>alert('$_POST[fileToUpload]')</script>";
                 $exists=0;
                 $sqry = $con->query("select contactNumber,email from staffMaster;");
                 if ($sqry) {
@@ -431,8 +451,8 @@
                     
                             
                             $qry = $con->query("insert into staffMaster(staffFName,staffMName,staffLName,contactNumber,email,gender,address,"
-                                    . "dateOfBirth,dateOfJoining,maritalStatues,staffTypeId,staffImage) values('$fname','$mname','$lname','$contact','$email',"
-                                    . "'$gender','$address','$dob','$doj','$marital','$stype','$simg')");
+                                    . "dateOfBirth,dateOfJoining,maritalStatues,staffTypeId,staffImage,password) values('$fname','$mname','$lname','$contact','$email',"
+                                    . "'$gender','$address','$dob','$doj','$marital','$stype','$simg','$password')");
                             //echo "<script>alert('$qry')</script>";
 
                             if ($qry == true) {

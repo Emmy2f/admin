@@ -1,7 +1,7 @@
 <?php session_start() ;
     if(!isset($_SESSION['admin']))
     {
-        header("Location:index.php");
+        header("Location:login.php");
     }
 ?>
 <!DOCTYPE html>
@@ -23,7 +23,7 @@ and open the template in the editor.
         
         ?>
         <?php
-        $err_fname = $err_mname = $err_lname = $err_contact = $err_email = $err_gender = $err_address = $err_marital = $err_dob = $err_doj = "";
+        $err_fname = $err_mname = $err_lname = $err_contact = $err_email = $err_gender = $err_address = $err_marital = $err_dob = $err_doj = $err_stype= $err_pass= "";
             $staffId=$_POST['editid'];
              $qry = $con->query("select * from staffMaster where staffID=$staffId;");
 while ($row = $qry->fetch_assoc()) {
@@ -37,6 +37,8 @@ while ($row = $qry->fetch_assoc()) {
             $dob=$row['dateOfBirth'];
             $doj=$row['dateOfJoining'];
             $marital=$row['maritalStatues'];
+            $stype=$row['staffTypeId'];
+            $img=$row['staffImage'];
         }
         
         
@@ -50,12 +52,13 @@ while ($row = $qry->fetch_assoc()) {
                 <div class="content">
                     <div class="row">
                         <div class="col-lg-8 offset-lg-2">
-                            <h4 class="page-title">Register Staff</h4>
+                            <h4 class="page-title">Edit Staff</h4>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-8 offset-lg-2">
-                            <form method="post">
+                            <form method="post" action='editstaffcode.php'>
+                                <input type="hidden" name='id' value='<?php echo $staffId; ?>'>
                                 <div class="row">
 
                                     <div class="col-sm-4">
@@ -65,14 +68,15 @@ while ($row = $qry->fetch_assoc()) {
                                             <p><font color="red">
                                                 <?php
                                                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                                                    
                                                     if (empty($_POST['txtfname'])) {
                                                         $err_fname = "First Name is required";
                                                     } else if ((!preg_match("/^[a-zA-z]+$/", $_POST['txtfname']))) {
                                                         $err_fname = "Invalid data";
                                                     } else {
                                                         $err_fname = '';
-                                                    }
-                                                }
+                                                    }}
+                                                
                                                 echo $err_fname;
                                                 ?>
                                                 </font></p>
@@ -85,6 +89,7 @@ while ($row = $qry->fetch_assoc()) {
                                             <p><font color="red">
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    
     if (empty($_POST['txtmname'])) {
         $err_mname = "Middle Name is required";
     } else if ((!preg_match("/^[a-zA-z]+$/", $_POST['txtmname']))) {
@@ -106,6 +111,7 @@ echo $err_mname;
                                             <p><font color="red">
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+   
     if (empty($_POST['txtlname'])) {
         $err_lname = "Last Name is required";
     } else if ((!preg_match("/^[a-zA-z]+$/", $_POST['txtlname']))) {
@@ -126,6 +132,7 @@ echo $err_lname;
                                             <p><font color="red">
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    
     if (empty($_POST['txtcontact'])) {
         $err_contact = "Contact Number  is required";
     } else if ((!preg_match("/^[0-9]{10}+$/", $_POST['txtcontact']))) {
@@ -146,6 +153,7 @@ echo $err_contact;
                                             <p><font color="red">
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    
     if (empty($_POST['txtemail'])) {
         $err_email = "Email is required";
     } else if (!filter_var($_POST['txtemail'], FILTER_VALIDATE_EMAIL)) {
@@ -162,25 +170,27 @@ echo $err_email;
                                     <div class="col-sm-4">
                                         <div class="form-group gender-select">
                                             <label class="gen-label">Gender:</label>
+                                            <?php ?>
                                             <div class="form-check-inline">
                                                 <label class="form-check-label">
-                                                    <input type="radio" name="txtgender" class="form-check-input" value=0>Male
+                                                    <input type="radio" name="txtgender" class="form-check-input" value="0" <?php if($gender==0){echo 'checked';}?> > Male
                                                 </label>
                                             </div>
                                             <div class="form-check-inline">
                                                 <label class="form-check-label">
-                                                    <input type="radio" name="txtgender" class="form-check-input" value=1>Female
+                                                    <input type="radio" name="txtgender" class="form-check-input" value=1 <?php if($gender==1){echo 'checked';}?>>Female
                                                 </label>
                                             </div>
                                             <p><font color="red">
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+   
     if (!isset($_POST['txtgender'])) {
         $err_gender = "Gender is required";
     } else {
         $err_gender = '';
-    }
-}
+    }}
+
 echo $err_gender;
 ?>
                                                 </font></p>
@@ -194,6 +204,7 @@ echo $err_gender;
                                             <p><font color="red">
                                                 <?php
                                                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                                                    
                                                     if (empty($_POST['txtaddress'])) {
                                                         $err_address = "Address is required";
                                                     } else if ((!preg_match("/^[a-zA-z0-9 ]+$/", $_POST['txtaddress']))) {
@@ -201,7 +212,8 @@ echo $err_gender;
                                                     } else {
                                                         $err_address = '';
                                                     }
-                                                }
+                                                    }
+                                                
                                                 echo $err_address;
                                                 ?>
                                                 </font></p>
@@ -217,6 +229,7 @@ echo $err_gender;
                                             <p><font color="red">
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    
     $bday=new DateTime($_POST['txtdob']);
     $today=new DateTime(date('m.d.y'));
     $diff=$today->diff($bday);
@@ -234,7 +247,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     else {
         $err_dob = '';
     }
-}
+    }
+
 echo $err_dob;
 ?>
                                                 </font></p>
@@ -245,7 +259,7 @@ echo $err_dob;
                                         <div class="form-group">
                                             <label>Date of Joining</label>
 
-                                            <input name="txtdoj" type="date" class="form-control datetimepicker" value="<?php echo $doj ?>">
+                                            <input name="txtdoj" type="date" class="form-control" value="<?php echo $doj ?>">
 <p><font color="red">
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -258,29 +272,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     else {
         $err_doj = '';
-    }
-}
-echo $err_dob;
+    }}
+
+echo $err_doj;
 ?>
                                                 </font></p>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-4">
                                         <div class="form-group gender-select">
                                             <label class="gen-label">Marital Status:</label>
                                             <div class="form-check-inline">
                                                 <label class="form-check-label">
-                                                    <input type="radio" name="txtmarital" value=0 class="form-check-input">Single
+                                                    <input type="radio" name="txtmarital" value=0 class="form-check-input" <?php if($marital==0){echo 'checked';}?>>Single
                                                 </label>
                                             </div>
                                             <div class="form-check-inline">
                                                 <label class="form-check-label">
-                                                    <input type="radio" name="txtmarital" value=1 class="form-check-input">Married
+                                                    <input type="radio" name="txtmarital" value=1 class="form-check-input" <?php if($marital==1){echo 'checked';}?>>Married
                                                 </label>
                                             </div>
                                             <p><font color="red">
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    
     if (!isset($_POST['txtmarital'])) {
         $err_marital = "Marital Status is required";
     } else {
@@ -292,14 +307,74 @@ echo $err_marital;
                                                 </font></p>
                                         </div>
                                     </div>
+  <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label>Select Staff Type<span class="text-danger"></span></label>
+                                            <br>
+                                            <select class="form-control" name="txtstype">
+                                                <option value="select">--Select--</option>
+                                                <?php
+                                    $fetch = $con->query("select * from staffTypeMaster");
+                                    if ($fetch) {
 
+                                        while ($row = $fetch->fetch_assoc()) {
+                                            $id = $row['staffTypeId'];
+                                            if($id==$stype){
+                                                echo "<option value=$id selected>" . $row['staffType'] . "</option>";
+                                            }
+                                            else
+                                            {
+                                            echo "<option value=$id>" . $row['staffType'] . "</option>";
+                                            }
+                                        }
+                                    }
+                                    ?>
+                                            </select>
+                                            <p><font color="red">
+                                                <?php
+                                                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                                                   
+                                                    if ($_POST['txtstype'] == "select") {
+                                                        $err_stype = "Staff Type is required";
+                                                    } else {
+                                                        $err_stype = "";
+                                                    }
+                                                }
+                                                echo $err_stype;
+                                                ?>
+                                                </font></p>
+                                        </div>
+                                    </div>
+                                   
+
+<div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label>Password <span class="text-danger"></span></label>
+                                            <input name="txtpass" class="form-control" type="password">
+                                            <p><font color="red">
+                                                <?php
+                                                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                                                   
+                                                    if (empty($_POST['txtpass'])) {
+                                                        $err_pass = "Password is required";
+                                                    } else if ((!preg_match("/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,8}/", $_POST['txtpass']))) {
+                                                        $err_pass = "Password is not valid";
+                                                    } else {
+                                                        $err_pass = '';
+                                                    }
+                                                }
+                                                echo $err_pass;
+                                                ?>
+                                                </font></p>
+                                        </div>
+                                    </div>
 
 
 
                                 </div>
 
                                 <div class="m-t-20 text-center">
-                                    <input name="btnregstaff" type="submit" value="Register Staff" class="btn btn-primary submit-btn">
+                                    <input name="btnstaff" type="submit" value="Update Details" class="btn btn-primary submit-btn">
                                 </div>
                             </form>
                         </div>
@@ -307,6 +382,9 @@ echo $err_marital;
                 </div>
               
             </div>
+       
+
+        
         </body>
 </html>
 

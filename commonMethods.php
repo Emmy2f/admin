@@ -18,7 +18,7 @@ and open the template in the editor.
             if (isset($con->connect_error))
                 die("connection not established $con->connect_error");
             else {
-                echo "connection established";
+                //echo "connection established";
             }
         }
         

@@ -31,10 +31,10 @@ and open the template in the editor.
             <div class="content">
                 <div class="row">
                     <div class="col-sm-5 col-5">
-                        <h4 class="page-title">Staff</h4>
+                        <h4 class="page-title">Doctor</h4>
                     </div>
                     <div class="col-sm-7 col-7 text-right m-b-30">
-                        <a href="register-staff.php" class="btn btn-primary btn-rounded"><i class="fa fa-plus"></i> Register Staff</a>
+                        <a href="register-doctor.php" class="btn btn-primary btn-rounded"><i class="fa fa-plus"></i> Register Doctor</a>
                     </div>
                 </div>
                 <div class="row">
@@ -44,7 +44,8 @@ and open the template in the editor.
                             <table class="table table-striped custom-table mb-0 datatable">
                                 <thead>
                                     <tr>
-                                        <th>Staff ID </th>
+                                        <th>Doctor ID </th>
+                                        <th>Registration Number</th>
                                         <th>First Name</th>
                                         <th>Middle Name</th>
                                         <th>Last Name</th>
@@ -55,13 +56,14 @@ and open the template in the editor.
                                         <th>Date of Birth</th>
                                         <th>Date of Joining</th>
                                         <th>Marital Status</th>
-                                        <th>Staff Type</th>
+                                        <th>Specialization</th>
+                                        <th>Qualification</th>
                                         <th class="text-center" colspan="2">Action</th>
                                     </tr>
                                 </thead>
                                <tbody>
                                     <?php
-                                    $sqry = $con->query("select * from staffMaster;");
+                                    $sqry = $con->query("select * from doctorMaster;");
                         if ($sqry) {
 
                             while ($row = $sqry->fetch_assoc()) {
@@ -73,7 +75,7 @@ and open the template in the editor.
                                 {
                                     $gender="Female";
                                 }
-                                 if($row['maritalStatues']==0)
+                                 if($row['marital']==0)
                                 {
                                     $marital="Single";
                                 }
@@ -82,15 +84,21 @@ and open the template in the editor.
                                     $marital="Married";
                                 }
                                 
-                                $qry=$con->query("select * from staffTypeMaster where staffTypeId=$row[staffTypeId]");
+                                $qry=$con->query("select * from specializationMaster where specializationID=$row[specializationID]");
                                  while ($row2 = $qry->fetch_assoc())
                                  {
-                                     $stype=$row2['staffType'];
+                                     $spec=$row2['specializationName'];
                                  }
-                                echo "<tr><td>" . $row['staffID'] . "</td>"
-                                . "<td>" . $row['staffFName'] . "</td>"
-                                . "<td>" . $row['staffMName'] . "</td>"
-                                . "<td>" . $row['staffLName'] . "</td>"
+                                 $qry2=$con->query("select * from qualificationMaster where qualificationID=$row[qualificationID]");
+                                 while ($row3 = $qry2->fetch_assoc())
+                                 {
+                                     $quali=$row3['name'];
+                                 }
+                                echo "<tr><td>" . $row['doctorId'] . "</td>"
+                                        . "<td>" . $row['registrationNumber'] . "</td>"
+                                . "<td>" . $row['firstName'] . "</td>"
+                                . "<td>" . $row['middleName'] . "</td>"
+                                . "<td>" . $row['lastName'] . "</td>"
                                 . "<td>" . $row['contactNumber'] . "</td>"
                                 . "<td>" . $row['email'] . "</td>"
                                 . "<td>" . $gender . "</td>"
@@ -98,17 +106,18 @@ and open the template in the editor.
                                 . "<td>" . $row['dateOfBirth'] . "</td>"
                                 . "<td>" . $row['dateOfJoining'] . "</td>"
                                 . "<td>" . $marital . "</td>"
-                                . "<td>" . $stype. "</td>"
+                                . "<td>" . $spec. "</td>"
+                                . "<td>" . $quali. "</td>"        
                                 ."<td>
                                             
-                                    <form action='edit-staff.php' method='post'><input type='hidden' name='editid' value='$row[staffID]'><input type='submit' name='edit' value='Edit'></form>
+                                    <form action='edit-staff.php' method='post'><input type='hidden' name='editid' value='$row[doctorId]'><input type='submit' name='edit' value='Edit'></form>
                                     
                                                
                                         </td>"
                                   ."<td>
                                             
                                     
-                                    <form action='deletestaffcode.php' method='post'><input type='hidden' name='staffID' value='$row[staffID]'><input type='submit' name='delete' value='Delete'></form>
+                                    <form action='deletestaffcode.php' method='post'><input type='hidden' name='staffID' value='$row[doctorId]'><input type='submit' name='delete' value='Delete'></form>
                                                
                                         </td>"          
                                 . "</tr>";

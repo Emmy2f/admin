@@ -43,17 +43,25 @@ and open the template in the editor.
                                         <th>Department Head</th>
                                         <th>Contact Number</th>
                                         <th>Description</th>
-                                        <th class="text-right">Action</th>
+                                        <th class="text-right" colspan="2">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                      <?php
                                     $sqry = $con->query("select * from departmentMaster;");
                         if ($sqry) {
+                           
 
                             while ($row = $sqry->fetch_assoc()) {
+                                 $qry=$con->query("select * from doctorMaster where doctorId=$row[deptHead]");
+                                 while ($row2 = $qry->fetch_assoc())
+                                 {
+                                     $fname=$row2['firstName'];
+                                     $lname=$row2['lastName'];
+
+                                 }
                                 echo "<tr><td>" . $row['deptName'] . "</td>"
-                                . "<td>" . $row['deptHead'] . "</td>"
+                                . "<td>" . $fname." " .$lname. "</td>"
                                 . "<td>" . $row['deptContact'] . "</td>"
                                 . "<td>" . $row['deptDesc'] . "</td>"
                                 

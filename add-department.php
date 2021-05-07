@@ -24,7 +24,7 @@ and open the template in the editor.
     <body>
         <?php
         
-        $err_dname=$err_head=$err_contact=$err_desc="";
+        $err_dname=$err_head=$err_contact=$err_description="";
         ?>
         <div class="page-wrapper">
             <div class="content">
@@ -134,7 +134,7 @@ and open the template in the editor.
                         </form>
                         <?php
                         if (isset($_POST['btnsub']) ) {
-                            if($err_dname=="" && $err_head=="" && $err_contact=="" && $err_desc=="" )
+                            if($err_dname=="" && $err_head=="" && $err_contact=="" && $err_description=="" )
                             {
                             $dname=$_POST['txtdname'];
                             $head=$_POST['txthead'];

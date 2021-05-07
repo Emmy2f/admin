@@ -41,9 +41,7 @@ and open the template in the editor.
         ?>
     </head>
      <body>
-        <?php
-        doDBConnect();
-        ?>
+        
          
         <div class="main-wrapper">
 

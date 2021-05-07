@@ -27,7 +27,7 @@ and open the template in the editor.
     <body>
 <?php 
 
-$room=$_POST['roomnumber'];
+$room=$_POST['roomNumber'];
 //echo "<script>alert('$room')</script>";
  $qry = $con->query("select * from roomMaster where roomNumber=$room;");
 while ($row = $qry->fetch_assoc()) {
@@ -48,7 +48,8 @@ while ($row = $qry->fetch_assoc()) {
                 </div>
                 <div class="row">
                     <div class="col-lg-8 offset-lg-2">
-                        <form method="post" action="edit-room.php">
+                        <form method="post" action="editroomcode.php">
+                             <input type="hidden" name='id' value='<?php echo $room; ?>'>
                             <div class="form-group">
                                 <label>Room Number</label>
                                 <input class="form-control" name='txtrnum' type="text" value="<?php echo $room ?>"n disabled="true">
@@ -149,27 +150,7 @@ while ($row = $qry->fetch_assoc()) {
                                 <button name="btnsave" class="btn btn-primary submit-btn">Save Room</button>
                             </div>
                         </form>
-                        <?php
-                            if(isset($_POST['btnsave']))
-                            {
-                                $rnum=$_POST['txtrnum'];
-                                $floor=$_POST['txtfloor'];
-                                $type=$_POST['txttype'];
-                                $beds=$_POST['txtbeds'];
-                                $cost=$_POST['txtcost'];
-                                
-                                $uqry=$con->query("UPDATE roomMaster SET 'floor'=$floor, 'roomTypeId'=$type, 'numberOfBeds'=$beds"
-                                        . ",'costPerDay'=$cost where 'roomNumber'=$rnum");
-                                if($uqry==true)
-                                {
-                                    echo "<script>alert('Data updated')</script>";
-                                }
-                                else
-                                {
-                                    echo "<script>alert('Data not updated')</script>";
-                                }
-                            }
-                        ?>
+                       
                     </div>
                 </div>
             </div>

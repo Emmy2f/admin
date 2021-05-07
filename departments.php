@@ -67,14 +67,14 @@ and open the template in the editor.
                                 
                                 ."<td>
                                             
-                                    <form action='#' method='post'><input type='hidden' name='staffid' value='$row[deptId]'><input type='submit' name='edit' value='Edit'></form>
+                                    <form action='edit-department.php' method='post'><input type='hidden' name='editid' value='$row[deptId]'><input type='submit' name='edit' value='Edit'></form>
                                     
                                                
                                         </td>"
                                   ."<td>
                                             
                                     
-                                    <form action='#' method='post'><input type='hidden' name='staffID' value='$row[deptId]'><input type='submit' name='edit' value='Delete'></form>
+                                    <form action='deletedeptcode.php' method='post'><input type='hidden' name='deptID' value='$row[deptId]'><input type='submit' name='edit' value='Delete'></form>
                                                
                                         </td>"          
                                 . "</tr>";

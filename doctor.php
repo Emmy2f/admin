@@ -117,7 +117,7 @@ and open the template in the editor.
                                   ."<td>
                                             
                                     
-                                    <form action='deletestaffcode.php' method='post'><input type='hidden' name='staffID' value='$row[doctorId]'><input type='submit' name='delete' value='Delete'></form>
+                                    <form action='deletedoctorcode.php' method='post'><input type='hidden' name='doctorId' value='$row[doctorId]'><input type='submit' name='delete' value='Delete'></form>
                                                
                                         </td>"          
                                 . "</tr>";

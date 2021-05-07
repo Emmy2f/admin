@@ -273,7 +273,7 @@
                                                         $err_doj = '';
                                                     }
                                                 }
-                                                echo $err_dob;
+                                                echo $err_doj;
                                                 ?>
                                                 </font></p>
                                         </div>
@@ -474,6 +474,7 @@
 
               if ($qry == true) {
               echo "<script>alert('Data Inserted')</script>";
+              header("Location:doctor.php");
               } else {
               echo "<script>alert('Data Not Inserted')</script>";
                   }}

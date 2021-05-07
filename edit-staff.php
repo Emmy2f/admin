@@ -61,14 +61,14 @@ and open the template in the editor.
                                     <div class="form-group">
                                         <label>First Name</label>
                                         <input name="txtfname" id="fname" class="form-control" type="text" value="<?php echo $fname ?>">
-                                      
+
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label>Middle Name <span class="text-danger"></span></label>
                                         <input name="txtmname" class="form-control" type="text" value="<?php echo $mname ?>">
-                                      
+
                                     </div>
                                 </div>
                                 <br>
@@ -76,21 +76,21 @@ and open the template in the editor.
                                     <div class="form-group">
                                         <label>Last Name <span class="text-danger"></span></label>
                                         <input name="txtlname" class="form-control" type="text" value="<?php echo $lname ?>">
-                                        
+
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label>Contact Number </label>
                                         <input name="txtcontact" class="form-control" type="text" value="<?php echo $contact ?>">
-                                        
+
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label>Email <span class="text-danger"></span></label>
                                         <input name="txtemail" class="form-control" type="email" value="<?php echo $email ?>">
-                                        
+
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
@@ -99,19 +99,23 @@ and open the template in the editor.
 
                                         <div class="form-check-inline">
                                             <label class="form-check-label">
-                                                <input type="radio" name="txtgender" class="form-check-input" value="0" <?php if ($gender == 0) {
-    echo 'checked';
-} ?> > Male
+                                                <input type="radio" name="txtgender" class="form-check-input" value="0" <?php
+                                                if ($gender == 0) {
+                                                    echo 'checked';
+                                                }
+                                                ?> > Male
                                             </label>
                                         </div>
                                         <div class="form-check-inline">
                                             <label class="form-check-label">
-                                                <input type="radio" name="txtgender" class="form-check-input" value=1 <?php if ($gender == 1) {
-    echo 'checked';
-} ?>>Female
+                                                <input type="radio" name="txtgender" class="form-check-input" value=1 <?php
+                                                if ($gender == 1) {
+                                                    echo 'checked';
+                                                }
+                                                ?>>Female
                                             </label>
                                         </div>
-                                        
+
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
@@ -119,7 +123,7 @@ and open the template in the editor.
                                         <label>Address</label>
 
                                         <input name="txtaddress" type="text" class="form-control " value="<?php echo $address ?>">
-                                       
+
                                     </div>
                                 </div>
 
@@ -129,7 +133,7 @@ and open the template in the editor.
                                         <div>
                                             <input name="txtdob" type="date" class="form-control" value="<?php echo $dob ?>">
                                         </div>
-                                       
+
                                     </div>
                                 </div>
 
@@ -138,7 +142,7 @@ and open the template in the editor.
                                         <label>Date of Joining</label>
 
                                         <input name="txtdoj" type="date" class="form-control" value="<?php echo $doj ?>">
-                                       
+
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
@@ -146,19 +150,23 @@ and open the template in the editor.
                                         <label class="gen-label">Marital Status:</label>
                                         <div class="form-check-inline">
                                             <label class="form-check-label">
-                                                <input type="radio" name="txtmarital" value=0 class="form-check-input" <?php if ($marital == 0) {
-                                                echo 'checked';
-                                            } ?>>Single
+                                                <input type="radio" name="txtmarital" value=0 class="form-check-input" <?php
+                                                if ($marital == 0) {
+                                                    echo 'checked';
+                                                }
+                                                ?>>Single
                                             </label>
                                         </div>
                                         <div class="form-check-inline">
                                             <label class="form-check-label">
-                                                <input type="radio" name="txtmarital" value=1 class="form-check-input" <?php if ($marital == 1) {
-                                                echo 'checked';
-                                            } ?>>Married
+                                                <input type="radio" name="txtmarital" value=1 class="form-check-input" <?php
+                                                if ($marital == 1) {
+                                                    echo 'checked';
+                                                }
+                                                ?>>Married
                                             </label>
                                         </div>
-                                       
+
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
@@ -182,18 +190,12 @@ and open the template in the editor.
                                             }
                                             ?>
                                         </select>
-                                       
+
                                     </div>
                                 </div>
 
 
-                                <div class="col-sm-4">
-                                    <div class="form-group">
-                                        <label>Password <span class="text-danger"></span></label>
-                                        <input name="txtpass" class="form-control" type="password">
-                                       
-                                    </div>
-                                </div>
+                                
 
 
 

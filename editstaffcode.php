@@ -18,7 +18,7 @@ if (isset($_POST['btnstaff'])) {
     $doj = $_POST['txtdoj'];
     $marital = $_POST['txtmarital'];
     $stype = $_POST['txtstype'];
-    $password = $_POST['txtpass'];
+    
     $id = $_POST['id'];
     //echo "<script>alert('$id $fname')</script>";
     if (empty($_POST['txtfname'])) {
@@ -69,7 +69,7 @@ if (isset($_POST['btnstaff'])) {
 
     if (empty($_POST['txtaddress'])) {
         $err_address = "Address is required";
-    } else if ((!preg_match("/^[a-zA-z0-9 ]+$/", $_POST['txtaddress']))) {
+    } else if ((!preg_match("/^[a-zA-z0-9, ]+$/", $_POST['txtaddress']))) {
         $err_address = "Address is not valid";
     } else {
         $err_address = '';
@@ -109,15 +109,9 @@ if (isset($_POST['btnstaff'])) {
         $err_stype = "";
     }
     
-    if (empty($_POST['txtpass'])) {
-        $err_pass = "Password is required";
-    } else if ((!preg_match("/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,8}/", $_POST['txtpass']))) {
-        $err_pass = "Password is not valid";
-    } else {
-        $err_pass = '';
-    }
+  
     
-   if ($err_fname == "" && $err_mname == "" && $err_lname == "" && $err_contact == "" && $err_email == "" && $err_gender == "" && $err_address == "" && $err_marital == "" && $err_dob == "" && $err_doj == "" && $err_stype == "" && $err_img == "" && $err_pass=="") {
+   if ($err_fname == "" && $err_mname == "" && $err_lname == "" && $err_contact == "" && $err_email == "" && $err_gender == "" && $err_address == "" && $err_marital == "" && $err_dob == "" && $err_doj == "" && $err_stype == "" ) {
 
 
     $s = "update staffMaster set "
@@ -131,8 +125,8 @@ if (isset($_POST['btnstaff'])) {
             . "dateOfBirth='$dob',"
             . "dateOfJoining='$doj',"
             . "maritalStatues='$marital',"
-            . "staffTypeId='$stype',"
-            . "password='$password'"
+            . "staffTypeId='$stype'"
+           
             . " where staffID='$id'";
     $qry = $con->query($s);
 
@@ -146,7 +140,7 @@ if (isset($_POST['btnstaff'])) {
    }
    else
    {
-       echo "<script>alert('$err_fname $err_mname $err_lname $err_contact $err_email $err_gender $err_address $err_dob $err_doj $err_marital $err_stype $err_pass')</script>";
+       echo "<script>alert('$err_fname $err_mname $err_lname $err_contact $err_email $err_gender $err_address $err_dob $err_doj $err_marital $err_stype ')</script>";
    
       
    }

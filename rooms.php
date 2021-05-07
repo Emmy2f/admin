@@ -100,7 +100,7 @@ and open the template in the editor.
                                         <th>Number of Beds</th>
                                         <th>Cost Per Day</th>
                                         <th>Description</th>
-                                        <th class="text-right">Action</th>
+                                        <th class="text-center" colspan="2">Action</th>
                                     </tr>
                                 </thead>
                                <tbody>
@@ -114,16 +114,18 @@ and open the template in the editor.
                                 . "<td>" . $row['numberOfBeds'] . "</td>"
                                 . "<td>" . $row['costPerDay'] . "</td>"
                                 . "<td>" . $row['description'] . "</td>"
-                                ."<td class='text-right'>
-                                            <div class='dropdown dropdown-action'>
-                                                <a href='#' class='action-icon dropdown-toggle' data-toggle='dropdown' aria-expanded='false'><i class='fa fa-ellipsis-v'></i></a>
-                                                <div class='dropdown-menu dropdown-menu-right'>
-                                                
-                                                    <a class='dropdown-item' href='edit-room.php?i=$row[roomNumber];'><i class='fa fa-pencil m-r-5'></i> Edit</a>
-                                                    <a class=dropdown-item href='#' data-toggle='modal' data-target='#delete_department'><i class='fa fa-trash-o m-r-5'></i> Delete</a>
-                                                </div>
-                                            </div>
+                                 ."<td>
+                                            
+                                     <form action='edit-room.php' method='post'><input type='hidden' name='roomNumber' value='$row[roomNumber]'><input type='submit' name='edit' value='Edit'></form>
+                                    
+                                               
                                         </td>"
+                                  ."<td>
+                                            
+                                    
+                                    <form action='#' method='post'><input type='hidden' name='roomNumber' value='$row[roomNumber]'><input type='submit' name='edit' value='Delete'></form>
+                                               
+                                        </td>"          
                                 . "</tr>";
                             }
                             
@@ -136,6 +138,262 @@ and open the template in the editor.
                     </div>
 
                 </div>
+                <br><br>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4 class="title">2nd Floor</h4>
+                        <div class="table-responsive">
+                            <table class="table table-striped custom-table mb-0 datatable">
+                                <thead>
+                                    <tr>
+                                        <th>Room Number </th>
+                                        <th>Room Type</th>
+                                        <th>Number of Beds</th>
+                                        <th>Cost Per Day</th>
+                                        <th>Description</th>
+                                        <th class="text-center" colspan="2">Action</th>
+                                    </tr>
+                                </thead>
+                               <tbody>
+                                    <?php
+                                    $sqry = $con->query("select * from roomMaster where floor='2';");
+                        if ($sqry) {
+
+                            while ($row = $sqry->fetch_assoc()) {
+                                echo "<tr><td>" . $row['roomNumber'] . "</td>"
+                                . "<td>" . $row['roomTypeId'] . "</td>"
+                                . "<td>" . $row['numberOfBeds'] . "</td>"
+                                . "<td>" . $row['costPerDay'] . "</td>"
+                                . "<td>" . $row['description'] . "</td>"
+                                 ."<td>
+                                            
+                                     <form action='edit-room.php' method='post'><input type='hidden' name='roomNumber' value='$row[roomNumber]'><input type='submit' name='edit' value='Edit'></form>
+                                    
+                                               
+                                        </td>"
+                                  ."<td>
+                                            
+                                    
+                                    <form action='#' method='post'><input type='hidden' name='roomNumber' value='$row[roomNumber]'><input type='submit' name='edit' value='Delete'></form>
+                                               
+                                        </td>"          
+                                . "</tr>";
+                            }
+                            
+                        }
+                                    ?>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+                <br><br>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4 class="title">3rd Floor</h4>
+                        <div class="table-responsive">
+                            <table class="table table-striped custom-table mb-0 datatable">
+                                <thead>
+                                    <tr>
+                                        <th>Room Number </th>
+                                        <th>Room Type</th>
+                                        <th>Number of Beds</th>
+                                        <th>Cost Per Day</th>
+                                        <th>Description</th>
+                                        <th class="text-center" colspan="2">Action</th>
+                                    </tr>
+                                </thead>
+                               <tbody>
+                                    <?php
+                                    $sqry = $con->query("select * from roomMaster where floor='3';");
+                        if ($sqry) {
+
+                            while ($row = $sqry->fetch_assoc()) {
+                                echo "<tr><td>" . $row['roomNumber'] . "</td>"
+                                . "<td>" . $row['roomTypeId'] . "</td>"
+                                . "<td>" . $row['numberOfBeds'] . "</td>"
+                                . "<td>" . $row['costPerDay'] . "</td>"
+                                . "<td>" . $row['description'] . "</td>"
+                                 ."<td>
+                                            
+                                     <form action='edit-room.php' method='post'><input type='hidden' name='roomNumber' value='$row[roomNumber]'><input type='submit' name='edit' value='Edit'></form>
+                                    
+                                               
+                                        </td>"
+                                  ."<td>
+                                            
+                                    
+                                    <form action='#' method='post'><input type='hidden' name='roomNumber' value='$row[roomNumber]'><input type='submit' name='edit' value='Delete'></form>
+                                               
+                                        </td>"          
+                                . "</tr>";
+                            }
+                            
+                        }
+                                    ?>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+                <br><br>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4 class="title">4th Floor</h4>
+                        <div class="table-responsive">
+                            <table class="table table-striped custom-table mb-0 datatable">
+                                <thead>
+                                    <tr>
+                                        <th>Room Number </th>
+                                        <th>Room Type</th>
+                                        <th>Number of Beds</th>
+                                        <th>Cost Per Day</th>
+                                        <th>Description</th>
+                                        <th class="text-center" colspan="2">Action</th>
+                                    </tr>
+                                </thead>
+                               <tbody>
+                                    <?php
+                                    $sqry = $con->query("select * from roomMaster where floor='4';");
+                        if ($sqry) {
+
+                            while ($row = $sqry->fetch_assoc()) {
+                                echo "<tr><td>" . $row['roomNumber'] . "</td>"
+                                . "<td>" . $row['roomTypeId'] . "</td>"
+                                . "<td>" . $row['numberOfBeds'] . "</td>"
+                                . "<td>" . $row['costPerDay'] . "</td>"
+                                . "<td>" . $row['description'] . "</td>"
+                                 ."<td>
+                                            
+                                     <form action='edit-room.php' method='post'><input type='hidden' name='roomNumber' value='$row[roomNumber]'><input type='submit' name='edit' value='Edit'></form>
+                                    
+                                               
+                                        </td>"
+                                  ."<td>
+                                            
+                                    
+                                    <form action='#' method='post'><input type='hidden' name='roomNumber' value='$row[roomNumber]'><input type='submit' name='edit' value='Delete'></form>
+                                               
+                                        </td>"          
+                                . "</tr>";
+                            }
+                            
+                        }
+                                    ?>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+                <br><br>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4 class="title">5th Floor</h4>
+                        <div class="table-responsive">
+                            <table class="table table-striped custom-table mb-0 datatable">
+                                <thead>
+                                    <tr>
+                                        <th>Room Number </th>
+                                        <th>Room Type</th>
+                                        <th>Number of Beds</th>
+                                        <th>Cost Per Day</th>
+                                        <th>Description</th>
+                                        <th class="text-center" colspan="2">Action</th>
+                                    </tr>
+                                </thead>
+                               <tbody>
+                                    <?php
+                                    $sqry = $con->query("select * from roomMaster where floor='5';");
+                        if ($sqry) {
+
+                            while ($row = $sqry->fetch_assoc()) {
+                                echo "<tr><td>" . $row['roomNumber'] . "</td>"
+                                . "<td>" . $row['roomTypeId'] . "</td>"
+                                . "<td>" . $row['numberOfBeds'] . "</td>"
+                                . "<td>" . $row['costPerDay'] . "</td>"
+                                . "<td>" . $row['description'] . "</td>"
+                                 ."<td>
+                                            
+                                     <form action='edit-room.php' method='post'><input type='hidden' name='roomNumber' value='$row[roomNumber]'><input type='submit' name='edit' value='Edit'></form>
+                                    
+                                               
+                                        </td>"
+                                  ."<td>
+                                            
+                                    
+                                    <form action='#' method='post'><input type='hidden' name='roomNumber' value='$row[roomNumber]'><input type='submit' name='edit' value='Delete'></form>
+                                               
+                                        </td>"          
+                                . "</tr>";
+                            }
+                            
+                        }
+                                    ?>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+                <br><br>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4 class="title">6th Floor</h4>
+                        <div class="table-responsive">
+                            <table class="table table-striped custom-table mb-0 datatable">
+                                <thead>
+                                    <tr>
+                                        <th>Room Number </th>
+                                        <th>Room Type</th>
+                                        <th>Number of Beds</th>
+                                        <th>Cost Per Day</th>
+                                        <th>Description</th>
+                                        <th class="text-center" colspan="2">Action</th>
+                                    </tr>
+                                </thead>
+                               <tbody>
+                                    <?php
+                                    $sqry = $con->query("select * from roomMaster where floor='6';");
+                        if ($sqry) {
+
+                            while ($row = $sqry->fetch_assoc()) {
+                                echo "<tr><td>" . $row['roomNumber'] . "</td>"
+                                . "<td>" . $row['roomTypeId'] . "</td>"
+                                . "<td>" . $row['numberOfBeds'] . "</td>"
+                                . "<td>" . $row['costPerDay'] . "</td>"
+                                . "<td>" . $row['description'] . "</td>"
+                                 ."<td>
+                                            
+                                     <form action='edit-room.php' method='post'><input type='hidden' name='roomNumber' value='$row[roomNumber]'><input type='submit' name='edit' value='Edit'></form>
+                                    
+                                               
+                                        </td>"
+                                  ."<td>
+                                            
+                                    
+                                    <form action='#' method='post'><input type='hidden' name='roomNumber' value='$row[roomNumber]'><input type='submit' name='edit' value='Delete'></form>
+                                               
+                                        </td>"          
+                                . "</tr>";
+                            }
+                            
+                        }
+                                    ?>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+               
             </div>
 
         </div>

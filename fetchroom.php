@@ -19,14 +19,14 @@ and open the template in the editor.
                                 <select class="form-control" name="txtroom"  >
                                     <option value="select">--Select--</option>
                                    <?php
-                                    $q = intval($_GET['q']);
-
-                                    $fetch = $con->query("select * from roomMaster where floor=$q");
-                                    //print_r($fetch);
+                                    $q = ($_GET['q']);
+                                    //echo '<option>'.$q.'</option>';
+                                    $fetch = $con->query("select roomNumber from roomMaster where floor='$q'");
+                                    
                                     if ($fetch) {
 
                                         while ($row = $fetch->fetch_assoc()) {
-                                            $id = $row['roomNumber'];
+                                            //$id = $row['roomNumber'];
                                             echo "<option value=$id>" . $row['roomNumber'] . "</option>";
                                         }
                                     }

@@ -124,7 +124,7 @@ and open the template in the editor.
                                                     {
                                                         $err_beds="Number of Beds is required";
                                                     }
-                                                    else if ((!preg_match("/[0-9][0-9]/", $_POST['txtbeds']))) {
+                                                    else if ((!preg_match("/[0-9]{1,2}/", $_POST['txtbeds']))) {
                                                         $err_beds = "Invalid Beds number";
                                                         
                                                     } 

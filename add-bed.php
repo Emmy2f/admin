@@ -21,14 +21,8 @@ and open the template in the editor.
         doDBConnect();
         ?>
         <script>
-            function showroom()
-            {
-                document.getElementById('room').style.display = "block";
-                var floor = document.getElementById("floor").value;
-                // alert(floor);
-            }
-
-            function showUser(str) {
+          
+            function showRoom(str) {
                 if (str == "") {
                     document.getElementById("txtHint").innerHTML = "";
                     return;
@@ -47,7 +41,7 @@ and open the template in the editor.
     </head>
     <body><?php
         $err_bnum = $err_floor = $err_room = "";
-        $floor = "<script>document.write(floor)</script>";
+       
         ?>
         <div class="page-wrapper">
             <div class="content">
@@ -67,7 +61,7 @@ and open the template in the editor.
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($_POST['txtbnum'])) {
         $err_bnum = "Bed number is required";
-    } else if ((!preg_match("/[0-9][0-9][0-9]/", $_POST['txtbnum']))) {
+    } else if ((!preg_match("/[A-Z][0-9][0-9][0-9]/", $_POST['txtbnum']))) {
         $err_bnum = "Invalid Bed number";
     } else {
         $err_bnum = "";
@@ -80,7 +74,7 @@ echo $err_bnum;
 
                             <div class="form-group">
                                 <label>Select Floor</label>
-                                <select class="form-control" name="txtfloor" onchange="showUser(this.value)" id="floor">
+                                <select class="form-control" name="txtfloor" onchange="showRoom(this.value)" id="floor">
                                     <option value="select">--Select--</option>
                                     <option value="Ground">Ground</option>
                                     <option value="1">1</option>
@@ -114,5 +108,27 @@ echo $err_floor;
                     </div>
                 </div>
             </div>
+            <?php 
+                if(isset($_POST['btnaddroom']))
+                {
+                    $bed=$_POST['txtbnum'];
+                    $floor=$_POST['txtfloor'];
+                    $room=$_POST['txtroom'];
+                    
+                    $stmt=$con->prepare("insert into bedMaster values(?,?)");
+                    $stmt->bind_param("ss",$b,$r);
+                    $b=$bed;
+                    $r=$room;
+                    if($stmt->execute())
+                    {
+                        echo "<script>alert('data inserted')</script>";
+                        
+                    }
+                    else
+                    {
+                        echo "<script>alert('data not inserted')</script>";
+                    }
+                }
+            ?>
     </body>
 </html>

@@ -110,7 +110,7 @@ and open the template in the editor.
                                 . "<td>" . $quali. "</td>"        
                                 ."<td>
                                             
-                                    <form action='edit-staff.php' method='post'><input type='hidden' name='editid' value='$row[doctorId]'><input type='submit' name='edit' value='Edit'></form>
+                                    <form action='edit-doctor.php' method='post'><input type='hidden' name='editid' value='$row[doctorId]'><input type='submit' name='edit' value='Edit'></form>
                                     
                                                
                                         </td>"

@@ -38,7 +38,7 @@ and open the template in the editor.
                             <select name='txtrole' class="form-control">
                                             <option>-- Select --</option>
                                             <option value='admin'>Admin</option>
-                                            <option>Receptionist</option>
+                                            <option value='receptionist'>Receptionist</option>
                                             <option>Doctor</option>
                                             
                                         </select>
@@ -76,6 +76,25 @@ and open the template in the editor.
                    echo "<script>alert('Login successful')</script>";
                    $_SESSION['admin']=$email;
                    header("Location:index.php");
+               }
+            }
+            if($role=='receptionist')
+            {
+                //echo "<script>alert('he')</script>";
+                $stmt=$con->prepare("select * from staffMaster where email=? and password=? and staffTypeId='1' ");
+                $stmt->bind_param("ss", $user, $pass);
+                $user=$email;
+                $pass=$password;
+                $stmt->execute();
+                $result = $stmt->get_result();
+//while ($row = $result->fetch_assoc()) {
+//    echo $row['custName'];
+//}
+               if($result->num_rows>0)
+               {
+                   echo "<script>alert('Login successful')</script>";
+                   $_SESSION['receptionist']=$email;
+                   header("Location:rdashboard.php");
                }
             }
         }

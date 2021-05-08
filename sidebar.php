@@ -16,29 +16,29 @@
                             <a href="index.php"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                         </li>
 						<li>
-                                                    <a href="staff.php"><i class="fa fa-user-md"></i> <span>Manage Staff</span></a>
+                                                    <a href="staff.php"><i class="fa fa-user"></i> <span>Manage Staff</span></a>
                         </li>
                         <li>
-                            <a href="doctor.php"><i class="fa fa-wheelchair"></i> <span>Manage Doctor</span></a>
+                            <a href="doctor.php"><i class="fa fa-user-md"></i> <span>Manage Doctor</span></a>
                         </li>
                         <li>
-                            <a href="departments.php"><i class="fa fa-calendar"></i> <span>Manage Department</span></a>
+                            <a href="departments.php"><i class="fa fa-building"></i> <span>Manage Department</span></a>
                         </li>
                         
                         <li>
-                            <a href="rooms.php"><i class="fa fa-calendar-check-o"></i> <span>Manage Room</span></a>
+                            <a href="rooms.php"><i class="fa fa-building"></i> <span>Manage Room</span></a>
                         </li>
                         <li>
-                            <a href="add-bed.php"><i class="fa fa-hospital-o"></i> <span>Manage Bed</span></a>
+                            <a href="add-bed.php"><i class="fa fa-bed"></i> <span>Manage Bed</span></a>
                         </li>
                         <li>
-                            <a href="feedback.php"><i class="fa fa-hospital-o"></i> <span>Feedback Analysis</span></a>
+                            <a href="feedback.php"><i class="fa fa-check"></i> <span>Feedback Analysis</span></a>
                         </li>
                         <li>
-                            <a href="add-blog.php"><i class="fa fa-hospital-o"></i> <span>Manage Health Library</span></a>
+                            <a href="add-blog.php"><i class="fa fa-heartbeat"></i> <span>Manage Health Library</span></a>
                         </li>
                         <li>
-                            <a href="add-achievements.php"><i class="fa fa-hospital-o"></i> <span>Manage Achievements</span></a>
+                            <a href="add-achievements.php"><i class="fa fa-trophy"></i> <span>Manage Achievements</span></a>
                         </li>
                     </ul>
                 </div>

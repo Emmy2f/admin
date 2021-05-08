@@ -114,20 +114,20 @@ echo $err_floor;
                     $bed=$_POST['txtbnum'];
                     $floor=$_POST['txtfloor'];
                     $room=$_POST['txtroom'];
-                    
-                    $stmt=$con->prepare("insert into bedMaster values(?,?)");
-                    $stmt->bind_param("ss",$b,$r);
-                    $b=$bed;
-                    $r=$room;
-                    if($stmt->execute())
-                    {
-                        echo "<script>alert('data inserted')</script>";
-                        
-                    }
-                    else
-                    {
-                        echo "<script>alert('data not inserted')</script>";
-                    }
+                    echo "<script>alert('$room')</script>";
+//                    $stmt=$con->prepare("insert into bedMaster values(?,?)");
+//                    $stmt->bind_param("ss",$b,$r);
+//                    $b=$bed;
+//                    $r=$room;
+//                    if($stmt->execute())
+//                    {
+//                        echo "<script>alert('data inserted')</script>";
+//                        
+//                    }
+//                    else
+//                    {
+//                        echo "<script>alert('data not inserted')</script>";
+//                    }
                 }
             ?>
     </body>

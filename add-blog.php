@@ -18,6 +18,9 @@ and open the template in the editor.
         <?php include 'sidebar.php'; ?>
     </head>
     <body>
+        <?php
+            $err_title=$err_img=$err_category=$err_status=$err_desc="";
+        ?>
         <div class="page-wrapper">
             <div class="content">
                 <div class="row">
@@ -30,16 +33,19 @@ and open the template in the editor.
                         <form method="post">
                             <div class="form-group">
                                 <label>Blog Title</label>
-                                <input class="form-control" type="text">
+                                <input name='txttitle' class="form-control" type="text">
                                 <span style="color:red">
-
+                                    
                                 </span>
                             </div>
                             <div class="form-group">
                                 <label>Blog Images</label>
                                 <div>
-                                    <input class="form-control" type="file">
-                                    <small class="form-text text-muted">Max. file size: 50 MB. Allowed images: jpg, gif, png,jpeg . Maximum 10 images only.</small>
+                                    <input class="form-control" type="file" name="fileToUpload" id="fileToUpload">
+                                    <small class="form-text text-muted">Max. file size: 500 KB. Allowed images: jpg, gif, png,jpeg .</small>
+                                     <span style="color:red">
+                                         
+                                </span>
                                 </div>
 
                             </div>
@@ -47,7 +53,7 @@ and open the template in the editor.
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Blog Category</label>
-                                        <select class="select">
+                                        <select class="select" name='txtcategory'>
                                             <option>--Select--</option>
 
                                             <option>General Blogs</option>
@@ -57,30 +63,40 @@ and open the template in the editor.
                                             <option>Disease Blog</option>
 
                                         </select>
+                                         <span style="color:red">
+                                                
+                                </span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="display-block">Blog Status</label>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="status" id="blog_active" value="option1" checked>
+                                            <input class="form-check-input" type="radio" name="txtstatus" id="blog_active" value="option1" checked>
                                             <label class="form-check-label" for="blog_active">
                                                 Active
                                             </label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="status" id="blog_inactive" value="option2">
+                                            <input class="form-check-input" type="radio" name="txtstatus" id="blog_inactive" value="option2">
                                             <label class="form-check-label" for="blog_inactive">
                                                 Inactive
                                             </label>
                                         </div>
+                                        <br>
+                                         <span style="color:red">
+
+                                </span>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label>Blog Description</label>
-                                <textarea cols="30" rows="6" class="form-control"></textarea>
+                                <textarea name='txtdesc' cols="30" rows="6" class="form-control"></textarea>
+                             <span style="color:red">
+
+                                </span>
                             </div>
 
 
@@ -91,5 +107,6 @@ and open the template in the editor.
                     </div>
                 </div>
             </div>
+        </div>
     </body>
 </html>

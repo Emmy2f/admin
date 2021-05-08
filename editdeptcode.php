@@ -35,7 +35,7 @@ if (isset($_POST['btnsub'])) {
 
     if (empty($_POST['txtcontact'])) {
         $err_contact = "Contact Number  is required";
-    } else if ((!preg_match("/^[0-9]{10}+$/", $_POST['txtcontact']))) {
+    } else if ((!preg_match("/[0-9]{10}/", $_POST['txtcontact']))) {
         $err_contact = "Contact Number must be of 10 digits";
     } else {
         $err_contact = '';
@@ -63,8 +63,12 @@ if (isset($_POST['btnsub'])) {
             echo "<script>alert('Data Updated')</script>";
             header("Location:departments.php");
         } else {
-            echo "<script>alert('$err_dname $err_head $err_contact $err_description')</script>";
+            echo "<script>alert('Data Not Updated')</script>";
        }
+       
+       }
+        else {
+            echo "<script>alert('$err_dname $err_head $err_contact $err_description')</script>";
         
     }
 }

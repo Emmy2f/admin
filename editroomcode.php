@@ -1,6 +1,6 @@
 <?php
 
-if (isset($_POST['btnsave'])) {
+if (isset($_POST['btnroom'])) {
     include_once 'commonMethods.php';
     doDBConnect();
     $err_rnum = $err_floor = $err_type = $err_beds = $err_cost = $err_description = "";
@@ -9,7 +9,7 @@ if (isset($_POST['btnsave'])) {
     $rtype = $_POST['txttype'];
     $beds = $_POST['txtbeds'];
     $cost = $_POST['txtcost'];
-    
+    $desc=$_POST['txtdesc'];
     $id = $_POST['id'];
 
     if (empty($_POST['txtrnum'])) {
@@ -72,7 +72,7 @@ if (isset($_POST['btnsave'])) {
                  . ",costPerDay=?"
                  . ",description=? where roomNumber=?"
                  . "");
-         $stmt->bind_param("iiissi",$bfloor,$btype,$bbeds,$bcost,$bdesc,$bid);
+         $stmt->bind_param("ssissi",$bfloor,$btype,$bbeds,$bcost,$bdesc,$bid);
         $bfloor=$floor;
         $btype=$rtype;
         $bbeds=$beds;
@@ -84,7 +84,10 @@ if (isset($_POST['btnsave'])) {
             echo "<script>alert('Data Updated')</script>";
             header("Location:rooms.php");
         } else {
-            echo "<script>alert('$err_dname $err_head $err_contact $err_description')</script>";
+            echo "<script>alert(' Data not updated ')</script>";
        }
     }
+    else {
+            echo "<script>alert(' $err_rnum  $err_floor  $err_type  $err_beds  $err_cost  $err_description ')</script>";
+       }
 }

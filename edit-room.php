@@ -24,7 +24,7 @@ and open the template in the editor.
         ?>
       
     </head>
-    <body>
+   
 <?php 
 
 $room=$_POST['roomNumber'];
@@ -35,90 +35,81 @@ while ($row = $qry->fetch_assoc()) {
             $floor=$row['floor'];
             $cost=$row['costPerDay'];
             $type=$row['roomTypeId'];
+            $desc=$row['description'];
         }
         
 ?>
+     <body>
         <div class="page-wrapper">
-
             <div class="content">
                 <div class="row">
                     <div class="col-lg-8 offset-lg-2">
-                        <h4 class="page-title">Edit Room </h4>
+                        <h4 class="page-title">Edit Room</h4>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-8 offset-lg-2">
                         <form method="post" action="editroomcode.php">
-                             <input type="hidden" name='id' value='<?php echo $room; ?>'>
+                            <input type="hidden" name='id' value='<?php echo $room; ?>'>
                             <div class="form-group">
                                 <label>Room Number</label>
-                                <input class="form-control" name='txtrnum' type="text" value="<?php echo $room ?>"n disabled="true">
+                                <input class="form-control" type="text" name="txtrnum" value="<?php echo $room?>">
+                               
                             </div>
 
                             <div class="form-group">
                                 <label>Floor</label>
-                                <select class="form-control" name='txtfloor'>
-                                    
-                                    <option value="select" <?php 
-                                        if($floor=="select")
-                                        {
-                                            echo "selected";
-                                        }
-                                    
-                                     ?> > --Select--</option>
-                                    <option value="Ground" <?php 
-                                   if($floor=="Ground")
-                                        {
-                                            echo "selected";
-                                        }
-                                     ?> > Ground</option>
-                                    
+                                <select class="form-control" name="txtfloor">
+                                    <option value="select">--Select--</option>
+                                    <option value="Ground"
+                                            <?php 
+                                               if($floor=='Ground')
+                                               {
+                                                   echo 'selected';
+                                               }
+                                            ?>>Ground</option>
                                     <option value="1" <?php 
-                                    if($floor=="1")
-                                        {
-                                            echo "selected";
-                                        }
-                                     ?> > 1</option>
-                                    
-                                     <option value="2" <?php 
-                                    if($floor=="2")
-                                        {
-                                            echo "selected";
-                                        }
-                                     ?> > 2</option>
-                                    
-                                      <option value="3" <?php 
-                                   if($floor=="3")
-                                        {
-                                            echo "selected";
-                                        }
-                                     ?> > 3</option>
-                                      
-                                       <option value="4" <?php 
-                                   if($floor=="4")
-                                        {
-                                            echo "selected";
-                                        }
-                                     ?> > 4</option>
-                                       
-                                        <option value="5" <?php 
-                                   if($floor=="5")
-                                        {
-                                            echo "selected";
-                                        }
-                                     ?> > 5</option>
-                                        
-                                         <option value="6" <?php 
-                                   if($floor=="6")
-                                        {
-                                            echo "selected";
-                                        }
-                                     ?> > 6</option>
+                                               if($floor=='1')
+                                               {
+                                                   echo 'selected';
+                                               }
+                                            ?>>1</option>
+                                    <option value="2" <?php 
+                                               if($floor=='2')
+                                               {
+                                                   echo 'selected';
+                                               }
+                                            ?>>2</option>
+                                    <option value="3" <?php 
+                                               if($floor=='3')
+                                               {
+                                                   echo 'selected';
+                                               }
+                                            ?>>3</option>
+                                    <option value="4" <?php 
+                                               if($floor=='4')
+                                               {
+                                                   echo 'selected';
+                                               }
+                                            ?>>4</option>
+                                    <option value="5" <?php 
+                                               if($floor=='5')
+                                               {
+                                                   echo 'selected';
+                                               }
+                                            ?>>5</option>
+                                    <option value="6" <?php 
+                                               if($floor=='6')
+                                               {
+                                                   echo 'selected';
+                                               }
+                                            ?>>6</option>
                                 </select>
+                               
                             </div>
                             <div class="form-group">
                                 <label>Room Type</label>
-                                <select class="form-control" name='txttype' >
+                                <select class="form-control" name="txttype">
                                     <option value="select">--Select--</option>
                                     <?php
                                     $fetch = $con->query("select * from roomType");
@@ -126,28 +117,35 @@ while ($row = $qry->fetch_assoc()) {
 
                                         while ($row = $fetch->fetch_assoc()) {
                                             $id = $row['roomTypeId'];
-                                            if($id==$type){
-                                                echo "<option value=$id selected>" . $row['roomType'] . "</option>";
-                                            }
-                                            else
-                                            {
-                                            echo "<option value=$id>" . $row['roomType'] . "</option>";
-                                            }
+                                           // echo "<option value=$id>" . $row['roomType'] . "</option>";
+                                             if ($id == $type) {
+                                                        echo "<option value=$id selected>" . $row['roomType'] . "</option>";
+                                                    } else {
+                                                        echo "<option value=$id>" . $row['roomType'] . "</option>";
+                                                    }
                                         }
                                     }
                                     ?>
                                 </select>
+                              
                             </div>
                             <div class="form-group">
                                 <label>Number of Beds</label>
-                                <input class="form-control" name='txtbeds' type="text" value="<?php echo $beds;?>">
+                                <input class="form-control" type="text" name="txtbeds" value="<?php echo $beds?>">
+                                
                             </div>
                             <div class="form-group">
                                 <label>Cost Per Day</label>
-                                <input class="form-control" name='txtcost' type="text" value="<?php  echo $cost;?>">
+                                <input class="form-control" type="text" name="txtcost" value="<?php echo $cost?>">
+                               
+                            </div>
+                            <div class="form-group">
+                                <label>Description</label>
+                                <textarea class="form-control" rows="3" cols="30" name="txtdesc"><?php echo $desc?></textarea>
+                                
                             </div>
                             <div class="m-t-20 text-center">
-                                <button name="btnsave" class="btn btn-primary submit-btn">Save Room</button>
+                                <button class="btn btn-primary submit-btn" name="btnroom">Update Room</button>
                             </div>
                         </form>
                        

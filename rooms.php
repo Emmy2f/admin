@@ -58,6 +58,7 @@ and open the template in the editor.
                         if ($sqry) {
 
                             while ($row = $sqry->fetch_assoc()) {
+                                
                                 echo "<tr><td>" . $row['roomNumber'] . "</td>"
                                 . "<td>" . $row['roomTypeId'] . "</td>"
                                 . "<td>" . $row['numberOfBeds'] . "</td>"

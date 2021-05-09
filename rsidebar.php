@@ -16,7 +16,7 @@
                             <a href="rdashboard.php.php"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                         </li>
 						<li>
-                                                    <a href="#"><i class="fa fa-wheelchair"></i> <span>Manage Patient</span></a>
+                                                    <a href="patients.php"><i class="fa fa-wheelchair"></i> <span>Manage Patient</span></a>
                         </li>
                         <li>
                             <a href="appointment.php"><i class="fa fa-calendar"></i> <span>Appointment Scheduling</span></a>

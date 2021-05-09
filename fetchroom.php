@@ -15,9 +15,7 @@ and open the template in the editor.
     </head>
     <body>
                        
-                                <label>Select Room</label>
-                                <select class="form-control" name="txtroom"  >
-                                    <option value="select">--Select--</option>
+                               <option value="select">--Select--</option>
                                    <?php
                                     $q = ($_GET['q']);
                                     //echo '<option>'.$q.'</option>';
@@ -26,26 +24,12 @@ and open the template in the editor.
                                     if ($fetch) {
 
                                         while ($row = $fetch->fetch_assoc()) {
-                                            //$id = $row['roomNumber'];
+                                            $id = $row['roomNumber'];
                                             echo "<option value=$id>" . $row['roomNumber'] . "</option>";
                                         }
                                     }
                                     ?>
-                                </select>
-                                <span style="color:red">
-                                     <?php
-                                                if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                                                    if($_POST['txtroom']=="select")
-                                                    {
-                                                        $err_room="Room is required";
-                                                    }
-                                                   else {
-                                                        $err_room = "";
-                                                    }
-                                                }
-                                                echo $err_room;
-                                                ?>
-                                </span>
+                               
                            
                          
     </body>

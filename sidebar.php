@@ -28,8 +28,15 @@
                         <li>
                             <a href="rooms.php"><i class="fa fa-building"></i> <span>Manage Room</span></a>
                         </li>
-                        <li>
-                            <a href="add-bed.php"><i class="fa fa-bed"></i> <span>Manage Bed</span></a>
+                        <li class="submenu">
+                            <a href="admin-beds1.php"><i class="fa fa-bed"></i> <span>Manage Bed</span> <span class="menu-arrow"></span></a>
+                            <ul style="display: none;">
+                                <li><a href="add-bed.php">Add Bed</a></li>
+                                <li><a href="admin-beds1.php">Bed List</a></li>
+                                <li><a href="admin-beds2.php">Bed Allocation List</a></li>
+								
+								
+							</ul>
                         </li>
                         <li>
                             <a href="feedback.php"><i class="fa fa-check"></i> <span>Feedback Analysis</span></a>

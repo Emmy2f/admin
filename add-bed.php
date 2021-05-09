@@ -97,7 +97,25 @@ echo $err_floor;
 ?>
                                 </span>
                             </div>
-                          <div class="form-group"  id='txtHint'>
+                          <div class="form-group" >
+                               <label>Select Room</label>
+                                <select class="form-control" name="txtroom"  id='txtHint' >
+                                    <option value="select">--Select--</option>
+                                     </select>
+                                <span style="color:red">
+                                     <?php
+                                                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                                                    if($_POST['txtroom']=="select")
+                                                    {
+                                                        $err_room="Room is required";
+                                                    }
+                                                   else {
+                                                        $err_room = "";
+                                                    }
+                                                }
+                                                echo $err_room;
+                                                ?>
+                                </span>
                           </div>
 
                             <div class="m-t-20 text-center">
@@ -114,20 +132,20 @@ echo $err_floor;
                     $bed=$_POST['txtbnum'];
                     $floor=$_POST['txtfloor'];
                     $room=$_POST['txtroom'];
-                    echo "<script>alert('$room')</script>";
-//                    $stmt=$con->prepare("insert into bedMaster values(?,?)");
-//                    $stmt->bind_param("ss",$b,$r);
-//                    $b=$bed;
-//                    $r=$room;
-//                    if($stmt->execute())
-//                    {
-//                        echo "<script>alert('data inserted')</script>";
-//                        
-//                    }
-//                    else
-//                    {
-//                        echo "<script>alert('data not inserted')</script>";
-//                    }
+                    //echo "<script>alert('$room')</script>";
+                    $stmt=$con->prepare("insert into bedMaster values(?,?)");
+                    $stmt->bind_param("ss",$b,$r);
+                    $b=$bed;
+                    $r=$room;
+                    if($stmt->execute())
+                    {
+                        echo "<script>alert('data inserted')</script>";
+                        
+                    }
+                    else
+                    {
+                        echo "<script>alert('data not inserted')</script>";
+                    }
                 }
             ?>
     </body>

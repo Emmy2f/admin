@@ -39,7 +39,7 @@ and open the template in the editor.
                                     if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         if (empty($_POST['txttitle'])) {
                                             $err_title = "Title is required";
-                                        } else if ((!preg_match("/[a-zA-z0-9,- ]+/", $_POST['txttitle']))) {
+                                        } else if ((!preg_match("/[A-Za-z-, ]+/", $_POST['txttitle']))) {
                                             $err_title = "Invalid title";
                                         } else {
                                             $err_title = '';
@@ -71,11 +71,7 @@ and open the template in the editor.
                                                 $uploadOk = 0;
                                             }
 
-                                            // Check if file already exists
-                                            if (file_exists($target_file)) {
-                                                echo "Sorry, file already exists.";
-                                                $uploadOk = 0;
-                                            }
+                                          
 
                                             // Check file size
                                             if ($_FILES["fileToUpload"]["size"] > 500000) {
@@ -171,7 +167,7 @@ and open the template in the editor.
                                     if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         if (empty($_POST['txtdesc'])) {
                                             $err_description = "Description is required";
-                                        } else if ((!preg_match("/[A-Za-z0-9,-%. ]+/", $_POST['txtdesc']))) {
+                                        } else if ((!preg_match("/[A-Za-z0-9, %]+/", $_POST['txtdesc']))) {
                                             $err_description = "Invalid Description";
                                         } else {
                                             $err_description = "";
@@ -193,22 +189,23 @@ and open the template in the editor.
         </div>
         <?php
         if (isset($_POST['btnblog'])) {
-//            if ($err_title == "" && $err_img == "" && $err_category == "" && $err_status == "" && $err_description == "") {
-//                if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-//
-//                    //echo "The file " . htmlspecialchars(basename($_FILES["fileToUpload"]["name"])) . " has been uploaded.";
-//                } else {
-//
-//                    echo "Sorry, there was an error uploading your file.";
-//                }
-//                $title=$_POST['txttitle'];
-//                $img=$target_file;
-//                $category=$_POST['txtcategory'];
-//                $status=$_POST['txtstatus'];
-//                $desc=$_POST['txtdesc'];
-//                
+            if ($err_title == "" && $err_img == "" && $err_category == "" && $err_status == "" && $err_description == "")
+            {
+                if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+
+                    //echo "The file " . htmlspecialchars(basename($_FILES["fileToUpload"]["name"])) . " has been uploaded.";
+                } else {
+
+                    echo "Sorry, there was an error uploading your file.";
+                }
+                $title=$_POST['txttitle'];
+                $img=$target_file;
+                $category=$_POST['txtcategory'];
+                $status=$_POST['txtstatus'];
+                $desc=$_POST['txtdesc'];
+                
 //                $stmt=$con->prepare("insert into blogMaster(blogTitle,blogImage,blogCategory,blogStatus,description)"
-//                        . " values(?,?,?,?,?)");
+//                        . " values('?','?','?','?','?')");
 //                $stmt->bind_param("sssis",$btitle,$bimg,$bcategory,$bstatus,$bdesc);
 //                $btitle=$title;
 //                $bimg=$img;
@@ -224,11 +221,22 @@ and open the template in the editor.
 //                {
 //                    echo "<script>alert('Data Not Inserted')</script>";
 //                }
-//            }
-//            else {
-//
-//                echo "<script>alert('Form is not filled correctly')</script>";
-//            }
+                
+                $qry = $con->query("insert into blogMaster(blogTitle,blogImage,blogCategory,blogStatus,description)"
+                                    . "values('$title','$img','$category',$status','$desc')");
+                                    
+                            //echo "<script>alert('$qry')</script>";
+
+                            if ($qry == true) {
+                                echo "<script>alert('Data Inserted')</script>";
+                            } else {
+                                echo "<script>alert('Data Not Inserted')</script>";
+                            }
+            }
+            else {
+
+                echo "<script>alert('Form is not filled correctly')</script>";
+            }
         }
         ?>
     </body>

@@ -457,6 +457,7 @@
 
                             if ($qry == true) {
                                 echo "<script>alert('Data Inserted')</script>";
+                                header("Location:staff.php");
                             } else {
                                 echo "<script>alert('Data Not Inserted')</script>";
                             }

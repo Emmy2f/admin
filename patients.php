@@ -1,5 +1,5 @@
 <?php session_start() ;
-    if(!isset($_SESSION['admin']))
+    if(!isset($_SESSION['receptionist']))
     {
         header("Location:login.php");
     }
@@ -99,7 +99,7 @@ and open the template in the editor.
                                   ."<td>
                                             
                                     
-                                    <form action='deletepatientcode.php' method='post'><input type='hidden' name='staffID' value='$row[patientId]'><input type='submit' name='delete' value='Delete'></form>
+                                    <form action='deletepatientcode.php' method='post'><input type='hidden' name='editid' value='$row[patientId]'><input type='submit' name='delete' value='Delete'></form>
                                                
                                         </td>"          
                                 . "</tr>";

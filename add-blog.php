@@ -52,7 +52,7 @@ and open the template in the editor.
                             <div class="form-group">
                                 <label>Blog Images</label>
                                 <div>
-                                    <input class="form-control" type="file" name="fileToUpload" id="fileToUpload">
+                                    <input class="form-control" type="file" name="fileToUpload[]" id="fileToUpload" multiple>
                                     <small class="form-text text-muted">Max. file size: 500 KB. Allowed images: jpg, gif, png,jpeg .</small>
                                     <span style="color:red">
                                         <?php
@@ -222,8 +222,8 @@ and open the template in the editor.
 //                    echo "<script>alert('Data Not Inserted')</script>";
 //                }
                 
-                $qry = $con->query("insert into blogMaster(blogTitle,blogImage,blogCategory,blogStatus,description)"
-                                    . "values('$title','$img','$category',$status','$desc')");
+                $qry = $con->query("insert into blogMaster(blogTitle,blogCategory,blogStatus,description)"
+                                    . " values('$title','$category','$status','$desc')");
                                     
                             //echo "<script>alert('$qry')</script>";
 

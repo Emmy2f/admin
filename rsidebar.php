@@ -19,7 +19,7 @@
                                                     <a href="patients.php"><i class="fa fa-wheelchair"></i> <span>Manage Patient</span></a>
                         </li>
                         <li>
-                            <a href="appointment.php"><i class="fa fa-calendar"></i> <span>Appointment Scheduling</span></a>
+                            <a href="add-appointment.php"><i class="fa fa-calendar"></i> <span>Appointment Scheduling</span></a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-bed"></i> <span>Bed Allocation</span></a>

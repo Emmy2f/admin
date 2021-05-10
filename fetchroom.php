@@ -18,7 +18,7 @@ and open the template in the editor.
                                <option value="select">--Select--</option>
                                    <?php
                                     $q = ($_GET['q']);
-                                    //echo '<option>'.$q.'</option>';
+                                    echo '<option>'.$q.'</option>';
                                     $fetch = $con->query("select roomNumber from roomMaster where floor='$q'");
                                     
                                     if ($fetch) {

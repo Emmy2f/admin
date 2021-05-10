@@ -23,7 +23,7 @@ and open the template in the editor.
                                 if ($fetch) {
 
                                     while ($row = $fetch->fetch_assoc()) {
-                                       echo "<option>$row[day]</option>";
+                                       echo "<option value=$row[day]>$row[day]</option>";
                                     }
                                 }
                                     ?>

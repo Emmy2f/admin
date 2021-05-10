@@ -22,6 +22,8 @@ and open the template in the editor.
         doDBConnect();
         ?>
         <script>
+            
+           
 
             function show(str) {
                 if (str == "") {
@@ -38,16 +40,32 @@ and open the template in the editor.
                     xmlhttp.send();
                 }
             }
-            
-            function getday()
-            {
-                var doctor=document.getElementById('txtdoctor').value;
+//            
+            function showtime(str) {
+                //alert(str);
+                if (str == "") {
+                    document.getElementById("txtHint2").innerHTML = "";
+                    return;
+                }
+                 else {
+                    // alert(str);
+                    var xmlhttp = new XMLHttpRequest();
+                    xmlhttp.onreadystatechange = function () {
+                       
+                        if (this.readyState == 4 && this.status == 200) {
+                            document.getElementById("txtHint2").innerHTML = this.responseText;
+                        }
+                    };
+                    //str2="hello";
+                    str2=document.getElementById('txtdoctor').value;
+                    xmlhttp.open("GET", "fetchtime.php?q=" + str+"&d="+str2, true);
+                    xmlhttp.send();
+                }
             }
+            
+          
         </script>
-        <?php 
-            echo $doctor=  "<script>document.write(doctor)</script>";
-
-        ?>
+       
     </head>
     <body>
         <div class="page-wrapper">
@@ -74,7 +92,7 @@ and open the template in the editor.
                     <div class="col-lg-8 offset-lg-2">
                         <div class="form-group">
                             <label>Select Day</label>
-                           <select class="form-control" name="txthead" id="txtHint">
+                            <select class="form-control" name="txtday" id="txtHint" onchange="showtime(this.value)">
                                 <option value="select">--Select--</option>
                                 
                             </select>
@@ -82,6 +100,19 @@ and open the template in the editor.
                         </div>
 
                     </div>
+                    
+                    <div class="col-lg-8 offset-lg-2">
+                        <div class="form-group">
+                            <label>Select Time</label>
+                            <select class="form-control" name="txttime" id="txtHint2" >
+                                <option value="select">--Select--</option>
+                                
+                            </select>
+
+                        </div>
+
+                    </div>
+
                 </div>
 
 
